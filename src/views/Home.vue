@@ -5,7 +5,7 @@
       </el-header>
       <el-container>
         <el-aside width="180px"><home-nav></home-nav></el-aside>
-        <el-main></el-main>
+        <el-main><router-view></router-view></el-main>
       </el-container>
   </el-container>
 </template>
@@ -27,5 +27,11 @@ export default {
 <style scoped>
 .el-header{
   padding: 0 ;
+}
+.el-main{
+  padding: 0 !important;
+}
+.el-aside,.el-container {
+  height: 100%;
 }
 </style>

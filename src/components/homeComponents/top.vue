@@ -30,7 +30,7 @@ export default {
 <style>
 .top {
   width: 100%;
-  height: 45px;
+  height: 60px;
   background-color: #1c2431;
   display: flex;
   justify-content: space-between;
@@ -66,6 +66,7 @@ export default {
     color: #fff;
     margin-left: 10px;
     cursor: pointer;
+    text-align: center;
 }
 
 .logoutText{
