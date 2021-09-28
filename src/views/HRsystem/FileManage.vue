@@ -4,7 +4,9 @@
       <el-tab-pane label="基本资料">
         <basic-info></basic-info>
       </el-tab-pane>
-      <el-tab-pane label="部门资料">配置管理</el-tab-pane>
+      <el-tab-pane label="部门资料">
+        <department-info></department-info>
+      </el-tab-pane>
       <el-tab-pane label="人事资料">角色管理</el-tab-pane>
       <el-tab-pane label="个人信息">定时任务补偿</el-tab-pane>
       <el-tab-pane label="个性提醒">定时任务补偿</el-tab-pane>
@@ -13,13 +15,15 @@
 </template>
 
 <script>
-import basicInfo from '../../components/fileComponents/basicInfo.vue';
+import basicInfo from "../../components/fileComponents/basicInfo.vue";
+import departmentInfo from "../../components/fileComponents/departmentInfo.vue";
 export default {
   data() {
     return {};
   },
-  components:{
-    basicInfo
+  components: {
+    basicInfo,
+    departmentInfo,
   },
   methods: {},
   created() {},
