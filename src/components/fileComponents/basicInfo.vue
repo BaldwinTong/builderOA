@@ -55,20 +55,6 @@
       </div>
       <!-- <div v-else class="noData">暂无数据</div> -->
     </div>
-
-    <!-- 部门资料 -->
-    <div></div>
-
-    <!-- 人事资料 -->
-    <div></div>
-
-    <!-- 个人信息 -->
-    <div></div>
-
-    <!-- 个人提醒 -->
-    <div></div>
-
-    <!-- 添加子节点弹窗 -->
   </div>
 </template>
 

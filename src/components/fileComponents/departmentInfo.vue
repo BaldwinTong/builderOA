@@ -2,14 +2,21 @@
   <div>
     <!-- 职务 -->
     <div class="item">
-      <div class="duties" v-if="data.length > 0">
-        <el-tree :data="data" node-key="id" accordion default-expand-all>
+      <div class="duties" v-if="treeData.length > 0">
+        <el-tree :data="treeData" node-key="id" accordion default-expand-all>
         </el-tree>
       </div>
       <!-- v-if="showDutiesForm" -->
-      <div class="content-right" >
+      <div class="content-right">
+        <el-row class="elrow-btn">
+          <el-button type="primary" round @click="add">添加</el-button>
+        </el-row>
         <el-table :data="tableData" style="width: 100%" border>
-          <el-table-column prop="departmenNumber" label="部门编号" align="center">
+          <el-table-column
+            prop="departmenNumber"
+            label="部门编号"
+            align="center"
+          >
           </el-table-column>
           <el-table-column prop="departmentName" label="部门" align="center">
           </el-table-column>
@@ -19,83 +26,90 @@
           </el-table-column>
           <el-table-column prop="Actualcount" label="实际人数" align="center">
           </el-table-column>
-          <el-table-column prop="superiorDepartment" label="上级部门" align="center">
+          <el-table-column
+            prop="superiorDepartment"
+            label="上级部门"
+            align="center"
+          >
           </el-table-column>
         </el-table>
       </div>
     </div>
+
+    <!-- 弹窗 -->
+    <dialogs :showDialogs="showDialogs" @closeDialog="getComponentsType"></dialogs>
   </div>
 </template>
 
 <script>
+import dialogs from '../dialogComponents/adddepartment.vue'
 export default {
   props: {},
+  components:{
+    dialogs
+  },
   data() {
     return {
       showDutiesForm: false,
-      data: [
+      showDialogs:false,
+      treeData: [
         {
-          label: "波公司",
+          id: "1",
+          label: "销售部",
           children: [
             {
-              id: "1",
-              label: "销售部",
+              id: "1-1",
+              label: "成员组",
+              superiorNumber: "001",
+              remark: "xxxxx",
               children: [
                 {
-                  id: "1-1",
-                  label: "成员组",
-                  superiorNumber: "001",
-                  remark: "xxxxx",
-                  children: [
-                    {
-                      id: "1-1-1",
-                      label: "成员A",
-                    },
-                  ],
-                },
-                {
-                  id: "1-2",
-                  label: "成员组",
-                  superiorNumber: "002",
-                  remark: "xxxxx",
+                  id: "1-1-1",
+                  label: "成员A",
                 },
               ],
             },
             {
-              id: "2",
-              label: "人事部",
-              children: [
-                {
-                  id: "2-1",
-                  label: "成员组",
-                  superiorNumber: "015",
-                  remark: "xxxxx",
-                },
-                {
-                  id: "2-2",
-                  label: "成员组",
-                  superiorNumber: "017",
-                  remark: "xxxxx",
-                },
-              ],
+              id: "1-2",
+              label: "成员组",
+              superiorNumber: "002",
+              remark: "xxxxx",
+            },
+          ],
+        },
+        {
+          id: "2",
+          label: "人事部",
+          children: [
+            {
+              id: "2-1",
+              label: "成员组",
+              superiorNumber: "015",
+              remark: "xxxxx",
             },
             {
-              id: "3",
-              label: "开发部",
-              children: [
-                {
-                  id: "3-1",
-                  label: "成员组",
-                  superiorNumber: "020",
-                  remark: "xxxxx",
-                },
-                {
-                  id: "3-2",
-                  label: "成员组",
-                  superiorNumber: "021",
-                  remark: "xxxxx",
-                },
-              ],
+              id: "2-2",
+              label: "成员组",
+              superiorNumber: "017",
+              remark: "xxxxx",
+            },
+          ],
+        },
+        {
+          id: "3",
+          label: "开发部",
+          children: [
+            {
+              id: "3-1",
+              label: "成员组",
+              superiorNumber: "020",
+              remark: "xxxxx",
+            },
+            {
+              id: "3-2",
+              label: "成员组",
+              superiorNumber: "021",
+              remark: "xxxxx",
             },
           ],
         },
@@ -105,18 +119,25 @@ export default {
         {
           departmenNumber: "001",
           departmentName: "销售部",
-          Headcount:'10',
-          Actualcount:'5',
-          director:'Baldwin',
-          superiorDepartment:'无',
+          Headcount: "10",
+          Actualcount: "5",
+          director: "Baldwin",
+          superiorDepartment: "无",
         },
       ],
     };
   },
-  mounted() {},
-  methods: {},
   created() {},
-  components: {},
+  mounted() {},
+  methods: {
+    add(){
+      this.showDialogs = true
+    },
+    getComponentsType(e){
+      console.log(e);
+      this.showDialogs = e
+    }
+  },
   computed: {},
 };
 </script>
@@ -139,19 +160,6 @@ export default {
   border: 1px solid #ccc;
 }
 
-.icont {
-  margin-left: 50px;
-}
-
-.iconfont {
-  font-size: 16px;
-}
-
-.noData {
-  width: 100%;
-  text-align: center;
-}
-
 .dutiesForm {
   display: flex;
   justify-content: space-around;
@@ -159,7 +167,10 @@ export default {
   flex-wrap: wrap;
 }
 
-.inpt {
-  width: 300px;
+.elrow-btn {
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }
 </style>
