@@ -12,62 +12,56 @@
           <el-button type="primary" round @click="add">添加</el-button>
         </el-row>
         <el-table :data="tableData" style="width: 100%" border>
-          <el-table-column
-            prop="departmenNumber"
-            label="部门编号"
-            align="center"
-          >
+          <el-table-column prop="DeptIdNum" label="部门编号" align="center">
           </el-table-column>
-          <el-table-column prop="departmentName" label="部门" align="center">
+          <el-table-column prop="label" label="部门" align="center">
           </el-table-column>
-          <el-table-column prop="director" label="部门负责人" align="center">
+          <el-table-column prop="DeptPic" label="部门负责人" align="center">
           </el-table-column>
-          <el-table-column prop="Headcount" label="编制人数" align="center">
+          <el-table-column prop="plantNum" label="编制人数" align="center">
           </el-table-column>
-          <el-table-column prop="Actualcount" label="实际人数" align="center">
+          <el-table-column prop="actualNum" label="实际人数" align="center">
           </el-table-column>
-          <el-table-column
-            prop="superiorDepartment"
-            label="上级部门"
-            align="center"
-          >
-          </el-table-column>
+          <!-- <el-table-column prop="superiorDept" label="上级部门" align="center">
+          </el-table-column> -->
         </el-table>
       </div>
     </div>
-
     <!-- 弹窗 -->
-    <dialogs :showDialogs="showDialogs" @closeDialog="getComponentsType"></dialogs>
+    <dialogs
+      :showDialogs="showDialogs"
+      :treeData="treeData"
+      @closeDialog="getComponentsType"
+    ></dialogs>
   </div>
 </template>
 
 <script>
-import dialogs from '../dialogComponents/adddepartment.vue'
+import dialogs from "../dialogComponents/adddepartment.vue";
 export default {
   props: {},
-  components:{
-    dialogs
+  components: {
+    dialogs,
   },
   data() {
     return {
       showDutiesForm: false,
-      showDialogs:false,
+      showDialogs: false,
       treeData: [
         {
           id: "1",
           label: "销售部",
+          plantNum: "10",
+          actualNum: "5",
+          DeptPic: "Baldwin",
+          superiorDept: "无",
+          DeptIdNum: "001",
           children: [
             {
               id: "1-1",
               label: "成员组",
               superiorNumber: "001",
               remark: "xxxxx",
-              children: [
-                {
-                  id: "1-1-1",
-                  label: "成员A",
-                },
-              ],
             },
             {
               id: "1-2",
@@ -80,6 +74,11 @@ export default {
         {
           id: "2",
           label: "人事部",
+          plantNum: "10",
+          actualNum: "5",
+          DeptPic: "Baldwin",
+          superiorDept: "无",
+          DeptIdNum: "001",
           children: [
             {
               id: "2-1",
@@ -98,6 +97,11 @@ export default {
         {
           id: "3",
           label: "开发部",
+          plantNum: "10",
+          actualNum: "5",
+          DeptPic: "Baldwin",
+          superiorDept: "无",
+          DeptIdNum: "001",
           children: [
             {
               id: "3-1",
@@ -115,28 +119,43 @@ export default {
         },
       ],
 
-      tableData: [
-        {
-          departmenNumber: "001",
-          departmentName: "销售部",
-          Headcount: "10",
-          Actualcount: "5",
-          director: "Baldwin",
-          superiorDepartment: "无",
-        },
-      ],
+      tableData: [ ],
     };
   },
-  created() {},
+  created() {
+    this.changeData();
+  },
   mounted() {},
   methods: {
-    add(){
-      this.showDialogs = true
+    add() {
+      this.showDialogs = true;
     },
-    getComponentsType(e){
-      console.log(e);
-      this.showDialogs = e
-    }
+
+    changeData() {
+      this.tableData = this.treeData;
+    },
+
+    getComponentsType(e, data) {
+      if (data) {
+        if (data.superiorDept == "无") {
+          data.label = data.DeptName;
+          this.treeData.push(data);
+        } else {
+          this.treeData.forEach((item) => {
+            if (item.label == data.superiorDept) {
+              data.label = data.DeptName;
+              if (!item.children) {
+                item.children = [];
+                item.children.push(data);
+              }else{
+                item.children.push(data);
+              }
+            }
+          });
+        }
+      }
+      this.showDialogs = e;
+    },
   },
   computed: {},
 };

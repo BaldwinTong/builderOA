@@ -2,58 +2,35 @@
   <div>
     <!-- 职务 -->
     <div class="item">
-      <div class="duties" v-if="data.length > 0">
+      <div class="duties" @mouseenter="changeSize" v-for="item in treeData" :key="item.id" >
         <el-tree
-          :data="data"
+          :data="item.data"
           node-key="id"
           accordion
           default-expand-all
           :expand-on-click-node="false"
-          @node-click="handleNodeClick"
+          @node-click="handleNodeClick" 
         >
           <span class="custom-tree-node" slot-scope="{ node, data }">
             <span>{{ node.label }}</span>
-            <span v-if="node.level === 1 || node.level === 2"  class="icont">
+            <span v-if="node.level === 1" class="icont">
               <el-button type="text" size="mini" @click="() => append(data)">
-                <i class="iconfont icon-jia">添加</i>
+                <i class="iconfont icon-tianjia"></i>
               </el-button>
               <el-button
                 type="text"
                 size="mini"
                 @click="() => remove(node, data)"
               >
-                <i class="iconfont icon-shanchutianchong">删除</i>
+                <i class="iconfont icon-shanchu"></i>
               </el-button>
             </span>
           </span>
         </el-tree>
       </div>
-      <div class="content-right" v-if="showDutiesForm">
-        <el-form
-          ref="dutiesForm"
-          class="dutiesForm"
-          :model="dutiesForm"
-          label-width="80px"
-        >
-          <el-form-item label="序号">
-            <el-input class="inpt" v-model="dutiesForm.num"></el-input>
-          </el-form-item>
-          <el-form-item label="上级编码">
-            <el-input class="inpt" v-model="dutiesForm.superiorNum"></el-input>
-          </el-form-item>
-          <el-form-item label="名称">
-            <el-input class="inpt" v-model="dutiesForm.duties"></el-input>
-          </el-form-item>
-          <el-form-item label="备注">
-            <el-input
-              class="inpt"
-              type="textarea"
-              v-model="dutiesForm.desc"
-            ></el-input>
-          </el-form-item>
-        </el-form>
+      <div class="duties">
+
       </div>
-      <!-- <div v-else class="noData">暂无数据</div> -->
     </div>
   </div>
 </template>
@@ -65,66 +42,73 @@ export default {
   data() {
     return {
       showDutiesForm: false,
-      data: [
+      treeData: [
         {
-          label:'波波脆公司',
-          children:[
+          data: [
             {
-          id: "1",
-          label: "职务",
-          children: [
-            {
-              id: "1-1",
-              label: "董事长",
-              superiorNumber: "001",
-              remark:'xxxxx'
-            },
-            {
-              id: "1-2",
-              label: "总经理",
-              superiorNumber: "002",
-              remark:'xxxxx'
+              id: "1",
+              label: "职务",
+              children: [
+                {
+                  id: "1-1",
+                  label: "董事长",
+                  superiorNumber: "001",
+                  remark: "xxxxx",
+                },
+                {
+                  id: "1-2",
+                  label: "总经理",
+                  superiorNumber: "002",
+                  remark: "xxxxx",
+                },
+              ],
             },
           ],
         },
         {
-          id: "2",
-          label: "级别",
-          children: [
+          data: [
             {
-              id: "2-1",
-              label: "一级科员",
-              superiorNumber: "015",
-              remark:'xxxxx'
-            },
-            {
-              id: "2-2",
-              label: "二级科员",
-              superiorNumber: "017",
-              remark:'xxxxx'
+              id: "2",
+              label: "级别",
+              children: [
+                {
+                  id: "2-1",
+                  label: "一级科员",
+                  superiorNumber: "015",
+                  remark: "xxxxx",
+                },
+                {
+                  id: "2-2",
+                  label: "二级科员",
+                  superiorNumber: "017",
+                  remark: "xxxxx",
+                },
+              ],
             },
           ],
         },
         {
-          id: "3",
-          label: "职称",
-          children: [
+          data: [
             {
-              id: "3-1",
-              label: "教授",
-              superiorNumber: "020",
-              remark:'xxxxx'
-            },
-            {
-              id: "3-2",
-              label: "讲师",
-              superiorNumber: "021",
-              remark:'xxxxx'
+              id: "3",
+              label: "职称",
+              children: [
+                {
+                  id: "3-1",
+                  label: "教授",
+                  superiorNumber: "020",
+                  remark: "xxxxx",
+                },
+                {
+                  id: "3-2",
+                  label: "讲师",
+                  superiorNumber: "021",
+                  remark: "xxxxx",
+                },
+              ],
             },
           ],
         },
-          ]
-        }
       ],
       dutiesForm: {
         num: "",
@@ -137,7 +121,7 @@ export default {
   mounted() {},
   methods: {
     append(data) {
-      this.$prompt("请输入" + data.label, "提示", {
+      this.$prompt("请输入"+data.label, "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         inputValidator(value) {
@@ -171,7 +155,7 @@ export default {
       const index = children.findIndex((d) => d.id === data.id);
       children.splice(index, 1);
       if (node.level == 1) {
-        this.showDutiesForm = false
+        this.showDutiesForm = false;
       }
     },
     handleNodeClick(data) {
@@ -182,6 +166,9 @@ export default {
       this.dutiesForm.duties = obj.label;
       this.dutiesForm.desc = obj.remark;
     },
+    changeSize(){
+
+    }
   },
   created() {},
   components: {},
@@ -193,26 +180,16 @@ export default {
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
-  .content-right {
-    margin-left: 16px;
-    flex: 1;
-  }
+  flex-wrap: wrap;
 }
 .duties {
-  width: 300px;
-  height: 82vh;
+  width: 17%;
+  min-height: 170px;
   border-radius: 8px;
+  margin-right: 20px;
   padding: 4px;
   box-sizing: border-box;
   border: 1px solid #ccc;
-}
-
-.icont {
-  margin-left: 50px;
-}
-
-.iconfont {
-  font-size: 16px;
 }
 
 .noData {
@@ -225,6 +202,18 @@ export default {
   justify-content: space-around;
   align-items: center;
   flex-wrap: wrap;
+}
+
+.icon-tianjia,
+.icon-shanchu {
+  color: #606266;
+}
+
+.custom-tree-node {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 180px;
 }
 
 .inpt {
