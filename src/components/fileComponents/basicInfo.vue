@@ -2,14 +2,19 @@
   <div>
     <!-- 职务 -->
     <div class="item">
-      <div class="duties" @mouseenter="changeSize" v-for="item in treeData" :key="item.id" >
+      <div
+        class="duties"
+        @mouseenter="changeSize"
+        v-for="item in treeData"
+        :key="item.id"
+      >
         <el-tree
           :data="item.data"
           node-key="id"
           accordion
           default-expand-all
           :expand-on-click-node="false"
-          @node-click="handleNodeClick" 
+          @node-click="handleNodeClick"
         >
           <span class="custom-tree-node" slot-scope="{ node, data }">
             <span>{{ node.label }}</span>
@@ -28,10 +33,25 @@
           </span>
         </el-tree>
       </div>
-      <div class="duties">
-
+      <div class="duties addDuties">
+        <el-button type="primary" plain @click="addDuties">添加职称</el-button>
       </div>
     </div>
+    <el-dialog title="添加职称" :visible.sync="dialogFormVisible" width="30%">
+      <el-form :model="addDutiesForm" label-width="80px">
+        <el-form-item label="职称：">
+          <el-input
+            v-model="addDutiesForm.name"
+            placeholder="请输入职称名"
+            autocomplete="off"
+          ></el-input>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogFormVisible = false">取 消</el-button>
+        <el-button type="primary" @click="conform">确 定</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
@@ -41,7 +61,10 @@ export default {
   props: {},
   data() {
     return {
-      showDutiesForm: false,
+      dialogFormVisible: false,
+      addDutiesForm: {
+        name: "",
+      },
       treeData: [
         {
           data: [
@@ -121,7 +144,7 @@ export default {
   mounted() {},
   methods: {
     append(data) {
-      this.$prompt("请输入"+data.label, "提示", {
+      this.$prompt("请输入" + data.label, "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         inputValidator(value) {
@@ -150,25 +173,64 @@ export default {
         });
     },
     remove(node, data) {
+      let list = JSON.parse(JSON.stringify(this.treeData));
+      list.forEach((item, index) => {
+        if (item.data[0].id == data.id) {
+          this.treeData.splice(index, 1);
+        }
+      });
       const parent = node.parent;
       const children = parent.data.children || parent.data;
       const index = children.findIndex((d) => d.id === data.id);
       children.splice(index, 1);
-      if (node.level == 1) {
-        this.showDutiesForm = false;
-      }
     },
     handleNodeClick(data) {
-      this.showDutiesForm = true;
       let obj = JSON.parse(JSON.stringify(data));
       this.dutiesForm.num = obj.id;
       this.dutiesForm.superiorNum = obj.superiorNumber;
       this.dutiesForm.duties = obj.label;
       this.dutiesForm.desc = obj.remark;
     },
-    changeSize(){
 
-    }
+    addDuties() {
+      this.dialogFormVisible = true;
+    },
+
+    conform() {
+      let obj = {
+        data: [
+          {
+            label: "",
+            id: "",
+          },
+        ],
+      };
+
+      if (this.addDutiesForm.name) {
+        let rete = false;
+        this.treeData.forEach((item) => {
+          if (item.data[0].label == this.addDutiesForm.name) {
+            rete = true;
+          }
+        });
+        if (rete) {
+          this.$mess.warning("此职称已使用");
+          return;
+        } else {
+          obj.data[0].label = this.addDutiesForm.name;
+          obj.data[0].id = this.treeData.length + 1;
+          this.treeData.push(obj);
+          this.addDutiesForm = {
+            name: "",
+          };
+          this.dialogFormVisible = false;
+        }
+      } else {
+        this.$mess.warning("内容不能为空");
+      }
+    },
+
+    changeSize() {},
   },
   created() {},
   components: {},
@@ -187,6 +249,7 @@ export default {
   min-height: 170px;
   border-radius: 8px;
   margin-right: 20px;
+  margin-bottom: 20px;
   padding: 4px;
   box-sizing: border-box;
   border: 1px solid #ccc;
@@ -207,6 +270,12 @@ export default {
 .icon-tianjia,
 .icon-shanchu {
   color: #606266;
+}
+
+.addDuties {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .custom-tree-node {

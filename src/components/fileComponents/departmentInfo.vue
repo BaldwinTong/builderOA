@@ -31,6 +31,7 @@
     <dialogs
       :showDialogs="showDialogs"
       :treeData="treeData"
+      :treeDataChildren="tableData"
       @closeDialog="getComponentsType"
     ></dialogs>
   </div>
@@ -47,79 +48,86 @@ export default {
     return {
       showDutiesForm: false,
       showDialogs: false,
+      treeDatachildren: [],
       treeData: [
         {
-          id: "1",
-          label: "销售部",
-          plantNum: "10",
-          actualNum: "5",
-          DeptPic: "Baldwin",
-          superiorDept: "无",
-          DeptIdNum: "001",
+          id: "001",
+          label: "公司",
           children: [
             {
-              id: "1-1",
-              label: "成员组",
-              superiorNumber: "001",
-              remark: "xxxxx",
+              id: "1",
+              label: "销售部",
+              plantNum: "10",
+              actualNum: "5",
+              DeptPic: "Baldwin",
+              superiorDept: "公司",
+              DeptIdNum: "001",
+              children: [
+                {
+                  id: "1-1",
+                  label: "成员组1",
+                  superiorNumber: "001",
+                  remark: "xxxxx",
+                },
+                {
+                  id: "1-2",
+                  label: "成员组2",
+                  superiorNumber: "002",
+                  remark: "xxxxx",
+                },
+              ],
             },
             {
-              id: "1-2",
-              label: "成员组",
-              superiorNumber: "002",
-              remark: "xxxxx",
-            },
-          ],
-        },
-        {
-          id: "2",
-          label: "人事部",
-          plantNum: "10",
-          actualNum: "5",
-          DeptPic: "Baldwin",
-          superiorDept: "无",
-          DeptIdNum: "001",
-          children: [
-            {
-              id: "2-1",
-              label: "成员组",
-              superiorNumber: "015",
-              remark: "xxxxx",
-            },
-            {
-              id: "2-2",
-              label: "成员组",
-              superiorNumber: "017",
-              remark: "xxxxx",
-            },
-          ],
-        },
-        {
-          id: "3",
-          label: "开发部",
-          plantNum: "10",
-          actualNum: "5",
-          DeptPic: "Baldwin",
-          superiorDept: "无",
-          DeptIdNum: "001",
-          children: [
-            {
-              id: "3-1",
-              label: "成员组",
-              superiorNumber: "020",
-              remark: "xxxxx",
+              id: "2",
+              label: "人事部",
+              plantNum: "10",
+              actualNum: "5",
+              DeptPic: "Baldwin",
+              superiorDept: "公司",
+              DeptIdNum: "001",
+              children: [
+                {
+                  id: "2-1",
+                  label: "成员组3",
+                  superiorNumber: "015",
+                  remark: "xxxxx",
+                },
+                {
+                  id: "2-2",
+                  label: "成员组4",
+                  superiorNumber: "017",
+                  remark: "xxxxx",
+                },
+              ],
             },
             {
-              id: "3-2",
-              label: "成员组",
-              superiorNumber: "021",
-              remark: "xxxxx",
+              id: "3",
+              label: "开发部",
+              plantNum: "10",
+              actualNum: "5",
+              DeptPic: "Baldwin",
+              superiorDept: "公司",
+              DeptIdNum: "001",
+              children: [
+                {
+                  id: "3-1",
+                  label: "成员组5",
+                  superiorNumber: "020",
+                  remark: "xxxxx",
+                },
+                {
+                  id: "3-2",
+                  label: "成员组6",
+                  superiorNumber: "021",
+                  remark: "xxxxx",
+                },
+              ],
             },
           ],
         },
       ],
 
-      tableData: [ ],
+      tableData: [],
     };
   },
   created() {
@@ -132,27 +140,47 @@ export default {
     },
 
     changeData() {
-      this.tableData = this.treeData;
+      this.tableData = this.treeData[0].children;
     },
 
     getComponentsType(e, data) {
       if (data) {
-        if (data.superiorDept == "无") {
-          data.label = data.DeptName;
-          this.treeData.push(data);
-        } else {
-          this.treeData.forEach((item) => {
-            if (item.label == data.superiorDept) {
-              data.label = data.DeptName;
-              if (!item.children) {
-                item.children = [];
-                item.children.push(data);
-              }else{
-                item.children.push(data);
-              }
+        this.treeData[0].children.forEach((item) => {
+          if (item.label == data.superiorDept) {
+            data.label = data.DeptName;
+            if (!item.children) {
+              item.children = [];
+              item.children.push(data);
+            } else {
+              item.children.push(data);
             }
-          });
-        }
+          }
+        });
+        // if (data.superiorDept == "公司") {
+        //   this.treeData.forEach((item) => {
+        //     if (item.label == data.superiorDept) {
+        //       data.label = data.DeptName;
+        //       if (!item.children) {
+        //         item.children = [];
+        //         item.children.push(data);
+        //       } else {
+        //         item.children.push(data);
+        //       }
+        //     }
+        //   });
+        // } else {
+        //   this.treeData[0].children.forEach((item) => {
+        //     if (item.label == data.superiorDept) {
+        //       data.label = data.DeptName;
+        //       if (!item.children) {
+        //         item.children = [];
+        //         item.children.push(data);
+        //       } else {
+        //         item.children.push(data);
+        //       }
+        //     }
+        //   });
+        // }
       }
       this.showDialogs = e;
     },

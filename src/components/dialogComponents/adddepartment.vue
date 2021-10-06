@@ -34,7 +34,7 @@
         >
           <el-option
             v-for="item in options"
-            :key="item.value"
+            :key="item.index"
             :label="item.label"
             :value="item.value"
           >
@@ -58,6 +58,10 @@ export default {
       default: true,
     },
     treeData: {
+      type: Array,
+      default: () => {},
+    },
+    treeDataChildren: {
       type: Array,
       default: () => {},
     },
@@ -93,12 +97,12 @@ export default {
           { required: true, message: "请输入上级", trigger: ["change"] },
         ],
       },
-      options: [{ value: "无", label: "无" }],
+      options: [],
       value: "",
     };
   },
   created() {
-    this.getDeptNameList(this.treeData);
+    this.getDeptNameList();
   },
   methods: {
     changeShow() {
@@ -108,24 +112,30 @@ export default {
       this.dialogVisible = false;
       this.$emit("closeDialog", false);
     },
-    getDeptNameList(list) {
-      if (list.length > 0) {
-        list.forEach((item) => {
-          let obj = {};
-          obj.value = item.label;
-          obj.label = item.label;
-          this.options.push(obj);
-        });
-      }
+    getDeptNameList() {
+      this.options= []
+      this.treeData.forEach((item) => {
+        let obj1 = {};
+        obj1.value = item.label;
+        obj1.label = item.label;
+        this.options.push(obj1);
+      });
+
+      this.treeData[0].children.forEach(item=>{
+        let boj2 = {};
+        boj2.value = item.label;
+        boj2.label = item.label;
+        this.options.push(boj2);
+      })
     },
 
     submitForm(formName) {
-      let obj = JSON.parse(JSON.stringify(this.formData))
+      let obj = JSON.parse(JSON.stringify(this.formData));
       this.$refs[formName].validate((valid) => {
         if (valid) {
           this.$refs.formData.resetFields();
-          this.options= [{ value: "无", label: "无" }]
           this.$emit("closeDialog", false, obj);
+          this.getDeptNameList();
         } else {
           console.log("error submit!!");
           return false;
@@ -137,11 +147,13 @@ export default {
     showDialogs() {
       this.changeShow();
     },
-    treeData(newValue){
-      this.getDeptNameList(newValue);
-      
-    }
-
+    // treeData(newValue) {
+    //   console.log(newValue);
+    //   this.getDeptNameList(newValue);
+    // },
+    // treeDataChildren(newValue) {
+    //   this.getDeptNameList(newValue);
+    // },
   },
   components: {},
   computed: {},

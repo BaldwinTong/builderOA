@@ -7,6 +7,8 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import './assets/font/iconfont.css'
 import * as echarts from 'echarts'
+import OnlyMessage from './utils/onlyMSGbox'
+Vue.prototype.$mess = OnlyMessage
 Vue.prototype.$echarts = echarts
 Vue.prototype.$http = axios
 Vue.use(ElementUI)

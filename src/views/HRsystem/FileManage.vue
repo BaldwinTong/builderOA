@@ -7,7 +7,9 @@
       <el-tab-pane label="部门资料">
         <department-info></department-info>
       </el-tab-pane>
-      <el-tab-pane label="人事资料">角色管理</el-tab-pane>
+      <el-tab-pane label="人事资料">
+        <person-info></person-info>
+      </el-tab-pane>
       <el-tab-pane label="个人信息">定时任务补偿</el-tab-pane>
       <el-tab-pane label="个性提醒">定时任务补偿</el-tab-pane>
     </el-tabs>
@@ -17,6 +19,7 @@
 <script>
 import basicInfo from "../../components/fileComponents/basicInfo.vue";
 import departmentInfo from "../../components/fileComponents/departmentInfo.vue";
+import personInfo from "../../components/personnelMatters/personnelinfo.vue";
 export default {
   data() {
     return {};
@@ -24,6 +27,7 @@ export default {
   components: {
     basicInfo,
     departmentInfo,
+    personInfo
   },
   methods: {},
   created() {},
