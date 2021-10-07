@@ -1,7 +1,15 @@
 <template>
   <div>
-    <el-row>
+    <el-row type="flex" justify="space-between">
       <el-col :span="6">
+        <el-input v-model="search" clearable>
+          <i slot="prefix" class="el-input__icon el-icon-search"></i
+        ></el-input>
+        <el-button type="primary" class="searchBtn" @click="clickSearch"
+          >搜索</el-button
+        >
+      </el-col>
+      <el-col :span="2">
         <el-button type="primary" @click="addUser">添加人员</el-button>
       </el-col>
     </el-row>
@@ -62,8 +70,8 @@
           <el-button
             size="mini"
             type="info"
-            @click="handleCheck(scope.$index, scope.row)"
-            >查看</el-button
+            @click="handleAmend(scope.$index, scope.row)"
+            >修改</el-button
           >
           <el-button
             size="mini"
@@ -74,8 +82,18 @@
         </template>
       </el-table-column>
     </el-table>
-
-    <user-info :showDialog="showDialog" @closeDialog="handleClose">{{showDialog}}</user-info>
+    <el-pagination
+      class="pages"
+      background
+      layout="prev, pager, next"
+      :total="100"
+    >
+    </el-pagination>
+    <user-info
+      :showDialog="showDialog"
+      :userId="userId"
+      @closeDialog="handleClose"
+    ></user-info>
   </div>
 </template>
 
@@ -88,6 +106,8 @@ export default {
   data() {
     return {
       showDialog: false,
+      userId: 0,
+      search: "",
       tableData: [
         {
           userId: "20210505",
@@ -107,14 +127,43 @@ export default {
   },
   created() {},
   methods: {
+    clickSearch() {
+      const h = this.$createElement;
+      this.$notify({
+        title: "",
+        message: h("span", { style: "color: teal" }, "功能开发中"),
+      });
+    },
     handleClose(e) {
       this.showDialog = e;
     },
     addUser() {
+      this.userId = 0;
       this.showDialog = true;
     },
-    handleCheck() {},
-    handleDelete() {},
+    handleAmend() {
+      this.userId = 1;
+      this.showDialog = true;
+    },
+    handleDelete() {
+      this.$confirm("此操作将永久删除该数据, 是否继续?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      })
+        .then(() => {
+          this.$message({
+            type: "success",
+            message: "删除成功!",
+          });
+        })
+        .catch(() => {
+          this.$message({
+            type: "info",
+            message: "已取消删除",
+          });
+        });
+    },
   },
   computed: {},
 };
@@ -122,15 +171,25 @@ export default {
 <style lang='less' scoped>
 .el-row {
   margin-bottom: 20px;
-  float: right;
   &:last-child {
     margin-bottom: 0;
   }
 }
 .el-col {
   border-radius: 4px;
+  display: flex;
 }
+.el-icon-search {
+  color: #909399;
+}
+.searchBtn {
+  margin-left: 10px;
+}
+
 .bg-purple-dark {
   background: #99a9bf;
+}
+.pages {
+  margin-top: 20px;
 }
 </style>
