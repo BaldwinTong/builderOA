@@ -215,10 +215,10 @@ export default {
       typeof: Boolean,
       default: false,
     },
-    userId:{
-      typeof:String,
-      default:''
-    }
+    userId: {
+      typeof: String,
+      default: "",
+    },
   },
   data() {
     return {
@@ -253,17 +253,16 @@ export default {
         contractEndDate: "2024-7-7",
       },
       imageUrl: "",
-      Headers:{'Access-Control-Allow-Origin':'*'}
+      Headers: { "Access-Control-Allow-Origin": "*" },
     };
   },
   created() {},
   methods: {
-    getData(){
+    getData() {
       // if (this.userId) {
       //   console.log('0000');
       // }else{
       //   console.log('11111');
-
       // }
     },
     handleClose() {
@@ -286,10 +285,10 @@ export default {
     showDialog() {
       this.dialogVisible = this.showDialog;
     },
-    userId(){
+    userId() {
       console.log(this.userId);
-      this.getData()
-    }
+      this.getData();
+    },
   },
 };
 </script>

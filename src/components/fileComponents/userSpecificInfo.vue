@@ -22,33 +22,43 @@
       :visible.sync="dialogVisible"
       width="30%"
       :before-close="handleClose"
+      title="人员信息"
+      align="center"
       fullscreen
     >
-      <el-tabs v-model="activeName" type="card" @tab-click="handleClick">
-        <el-tab-pane label="用户管理" name="first">用户管理</el-tab-pane>
-        <el-tab-pane label="配置管理" name="second">配置管理</el-tab-pane>
-        <el-tab-pane label="角色管理" name="third">角色管理</el-tab-pane>
-        <el-tab-pane label="定时任务补偿" name="fourth"
-          >定时任务补偿</el-tab-pane
-        >
+      <el-tabs v-model="activeName" type="border-card" @tab-click="handleClick">
+        <el-tab-pane label="基本信息" name="a">
+          <base-info></base-info>
+        </el-tab-pane>
+        <el-tab-pane label="奖惩记录" name="b">
+          <rap-log></rap-log>
+        </el-tab-pane>
+        <el-tab-pane label="社会关系" name="c">社会关系</el-tab-pane>
+        <el-tab-pane label="保险记录" name="d">保险记录</el-tab-pane>
+        <el-tab-pane label="理赔记录" name="e">理赔记录</el-tab-pane>
+        <el-tab-pane label="体检记录" name="f">体检记录</el-tab-pane>
+        <el-tab-pane label="医疗记录" name="g">医疗记录</el-tab-pane>
+        <el-tab-pane label="个人简历" name="h">个人简历</el-tab-pane>
+        <el-tab-pane label="学历记录" name="i">学历记录</el-tab-pane>
+        <el-tab-pane label="职称记录" name="j">职称记录</el-tab-pane>
+        <el-tab-pane label="异动情况" name="k">异动情况</el-tab-pane>
+        <el-tab-pane label="证照记录" name="l">证照记录</el-tab-pane>
       </el-tabs>
-      <!-- <span slot="footer" class="dialog-footer">
-        <el-button @click="dialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="dialogVisible = false"
-          >确 定</el-button
-        >
-      </span> -->
     </el-dialog>
   </div>
 </template>
 
 <script>
+import { baseInfo,rapLog } from "./userInfo";
 export default {
-  components: {},
+  components: {
+    baseInfo,
+    rapLog
+  },
   data() {
     return {
       dialogVisible: false,
-      activeName: 'first',
+      activeName: "a",
       treeData: [
         {
           label: "总经办",
