@@ -23,12 +23,26 @@
             <!-- <el-button type="success" round @click="addNewProject"
               >新增人事异动项目</el-button
             > -->
-            <div class="icon" @click="handleShenhe">
-              <i class="iconfont icon-shenhe"></i>
-            </div>
-            <div class="icon" @click="handleAdd">
-              <i class="iconfont icon-tianjia1"></i>
-            </div>
+            <el-tooltip
+              class="item"
+              effect="dark"
+              content="审核处理"
+              placement="top-start"
+            >
+              <div class="icon" @click="handleShenhe">
+                <i class="iconfont icon-shenhe"></i>
+              </div>
+            </el-tooltip>
+            <el-tooltip
+              class="item"
+              effect="dark"
+              content="添加人事异动项目"
+              placement="top-start"
+            >
+              <div class="icon" @click="handleAdd">
+                <i class="iconfont icon-tianjia1"></i>
+              </div>
+            </el-tooltip>
           </div>
         </div>
         <el-table
@@ -79,7 +93,11 @@
         <div class="btns">
           <el-form :inline="true" :model="bequitForm" label-width="70px">
             <el-form-item label="离职形式">
-              <el-select v-model="bequitForm.quitWay" clearable placeholder="请选择">
+              <el-select
+                v-model="bequitForm.quitWay"
+                clearable
+                placeholder="请选择"
+              >
                 <el-option
                   v-for="item in options"
                   :key="item.value"
@@ -92,7 +110,8 @@
             <el-form-item label="离职日期">
               <el-date-picker
                 v-model="bequitForm.quitDate"
-                type="date" clear-icon="el-icon-date"
+                type="date"
+                clear-icon="el-icon-date"
                 placeholder="选择日期"
               >
               </el-date-picker>
@@ -110,6 +129,61 @@
               <i slot="prefix" class="el-input__icon el-icon-search"></i>
             </el-input>
           </div>
+        </div>
+        <div>
+          <el-table
+            :data="quitTableData"
+            border
+            style="width: 100%"
+            @selection-change="handleSelectionChange"
+          >
+            <el-table-column type="selection" align="center"> </el-table-column>
+            <el-table-column
+              type="index"
+              label="序号"
+              align="center"
+              width="50px"
+            >
+            </el-table-column>
+            <el-table-column prop="date" label="日期" align="center">
+            </el-table-column>
+            <el-table-column prop="name" label="姓名" align="center">
+            </el-table-column>
+            <el-table-column
+              prop="exDepartment"
+              label="原工作部门"
+              align="center"
+            >
+            </el-table-column>
+            <el-table-column prop="exJob" label="原职务" align="center">
+            </el-table-column>
+            <el-table-column prop="reason" label="离职原因" align="center">
+            </el-table-column>
+            <el-table-column prop="quitWay" label="离职方式" align="center">
+            </el-table-column>
+
+            <el-table-column label="操作" align="center">
+              <template slot-scope="scope">
+                <el-button
+                  size="mini"
+                  type="primary"
+                  @click="handleCheck(scope.$index, scope.row)">确认</el-button>
+                <el-button
+                  size="mini"
+                  type="danger"
+                  @click="handleCheck(scope.$index, scope.row)"
+                  >删除</el-button
+                >
+                <el-button
+                  size="mini"
+                  type="info" style="margin-top:6px"
+                  @click="handleCheck(scope.$index, scope.row)"
+                  >恢复</el-button
+                >
+              </template>
+              
+            </el-table-column>
+          </el-table>
         </div>
       </div>
     </div>
@@ -174,6 +248,17 @@ export default {
           checkStatus: "待审核",
         },
       ],
+      quitTableData: [
+        {
+          date: "2022-05-02",
+          name: "王小虎",
+          exDepartment: "开发部",
+          exJob: "软件开发",
+          reason: "个人原因",
+          reviewer: "总经理",
+          quitWay: "主动离职",
+        },
+      ],
       multipleSelection: [],
       search: "",
       dialogVisible: false,
@@ -192,8 +277,8 @@ export default {
 
       // 离职管理
       bequitForm: {
-        quitWay:"",
-        quitDate:""
+        quitWay: "",
+        quitDate: "",
       },
       options: [
         {
@@ -203,10 +288,6 @@ export default {
         {
           value: "公司辞退",
           label: "公司辞退",
-        },
-        {
-          value: "退休",
-          label: "退休",
         },
       ],
     };
@@ -245,6 +326,7 @@ export default {
           });
       }
     },
+
     handleSelectionChange(val) {
       console.log(val);
       this.multipleSelection = val;
@@ -289,7 +371,7 @@ export default {
   }
 }
 .el-icon-search {
-  color: #909399 ;
+  color: #909399;
 }
 .container {
   padding: 0 16px;
