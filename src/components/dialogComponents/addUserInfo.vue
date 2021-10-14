@@ -183,6 +183,7 @@
             </el-form-item>
           </el-form>
         </div>
+        <el-button size="small" @click="showDetail">显示详细信息</el-button>
       </div>
       <div class="headImage">
         <el-upload
@@ -199,6 +200,37 @@
         <h3 style="text-align: center; margin-top: 10px">上传照片</h3>
       </div>
     </div>
+
+    <el-dialog
+      width="60%"
+      title="详细信息"
+      :visible.sync="innerVisible"
+      append-to-body
+    >
+      <el-tabs type="border-card">
+        <el-tab-pane label="工作经历">
+          <div class="textList">
+            <div v-for="item in 4" :key="item" class="workerItem">
+              <span>这是我的工作经历</span>
+              <p>
+                <span class="handle">编辑</span>
+                <span class="handle">删除</span>
+              </p>
+            </div>
+          </div>
+          <div class="workerEdit">
+            <h4>编写工作经历</h4>
+            <el-input type="textarea"></el-input>
+          </div>
+          <el-button type="primary" size="small">确定</el-button>
+        </el-tab-pane>
+        <el-tab-pane label="教育及专业培训">教育及专业培训</el-tab-pane>
+        <el-tab-pane label="社会关系">社会关系</el-tab-pane>
+        <el-tab-pane label="证件（照片）">证件（照片）</el-tab-pane>
+        <el-tab-pane label="合同管理">合同管理</el-tab-pane>
+        <el-tab-pane label="考核成绩录入">考核成绩录入</el-tab-pane>
+      </el-tabs>
+    </el-dialog>
 
     <span slot="footer" class="dialog-footer">
       <el-button @click="handleClose">取 消</el-button>
@@ -223,6 +255,7 @@ export default {
   data() {
     return {
       dialogVisible: false,
+      innerVisible: false,
       personInfoForm: {
         jobNum: "10001",
         name: "Dachui Wang",
@@ -264,6 +297,9 @@ export default {
       // }else{
       //   console.log('11111');
       // }
+    },
+    showDetail() {
+      this.innerVisible = true;
     },
     handleClose() {
       this.$emit("closeDialog", false);
@@ -351,5 +387,43 @@ export default {
   width: 178px;
   height: 178px;
   display: block;
+}
+
+// 内部弹窗样式
+.textList {
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 0px 12px;
+  box-sizing: border-box;
+  max-height: 150px;
+  overflow: auto;
+  .workerItem{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ccc;
+  }
+  p {
+    margin: 6px;
+    padding: 6px;
+    .handle{
+      cursor: pointer;
+      margin-left: 6px;
+    }
+    .handle:hover{
+      color: brown;
+    }
+  }
+  .workerItem:last-child {
+    border-bottom: none;
+  }
+}
+
+.workerEdit {
+  h4 {
+    margin: 8px 0;
+  }
+  margin-bottom: 4px;
 }
 </style>

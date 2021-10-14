@@ -1,19 +1,19 @@
 <template>
   <div>
     <el-tabs type="border-card" v-model="activeName" @tab-click="handleClick">
-      <el-tab-pane label="基本资料" name="first">
+      <el-tab-pane label="基本资料" name="1">
         <basic-info v-if="isChildUpdate1"></basic-info>
       </el-tab-pane>
-      <el-tab-pane label="部门资料" name="second">
+      <el-tab-pane label="部门资料" name="2">
         <department-info v-if="isChildUpdate2"></department-info>
       </el-tab-pane>
-      <el-tab-pane label="人事资料" name="third">
+      <el-tab-pane label="人事资料" name="3">
         <person-info v-if="isChildUpdate3"></person-info>
       </el-tab-pane>
-      <el-tab-pane label="个人信息" name="fourth">
+      <el-tab-pane label="个人信息" name="4">
         <user-info v-if="isChildUpdate4"></user-info>
       </el-tab-pane>
-      <el-tab-pane label="个性提醒" name="fiveth">
+      <el-tab-pane label="个性提醒" name="5">
         <span slot="label">
           <span>个性提醒</span>
           <el-badge
@@ -25,6 +25,9 @@
           ></el-badge>
         </span>
         <reminder v-if="isChildUpdate5"></reminder>
+      </el-tab-pane>
+      <el-tab-pane label="分析图表" name="6">
+        
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -42,7 +45,7 @@ export default {
   data() {
     return {
       todo: 5,
-      activeName: "first",
+      activeName: "1",
       isChildUpdate1: true,
       isChildUpdate2: false,
       isChildUpdate3: false,

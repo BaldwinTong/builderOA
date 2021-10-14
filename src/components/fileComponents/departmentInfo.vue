@@ -3,7 +3,15 @@
     <!-- 职务 -->
     <div class="item">
       <div class="duties" v-if="treeData.length > 0">
-        <el-tree :data="treeData" node-key="id" accordion default-expand-all>
+        <el-tree
+          :data="treeData"
+          node-key="id"
+          ref="tree"
+          default-expand-all
+          :props="defaultProps"
+          @node-click="handleNodeClick"
+          highlight-current
+        >
         </el-tree>
       </div>
       <!-- v-if="showDutiesForm" -->
@@ -64,16 +72,26 @@ export default {
               DeptIdNum: "001",
               children: [
                 {
-                  id: "1-1",
+                  id: "11",
                   label: "成员组1",
                   superiorNumber: "001",
                   remark: "xxxxx",
+                  plantNum: "10",
+                  actualNum: "5",
+                  DeptPic: "Baldwin",
+                  superiorDept: "销售部",
+                  DeptIdNum: "001",
                 },
                 {
-                  id: "1-2",
+                  id: "12",
                   label: "成员组2",
                   superiorNumber: "002",
                   remark: "xxxxx",
+                  plantNum: "10",
+                  actualNum: "5",
+                  DeptPic: "Baldwin",
+                  superiorDept: "销售部",
+                  DeptIdNum: "001",
                 },
               ],
             },
@@ -87,16 +105,26 @@ export default {
               DeptIdNum: "001",
               children: [
                 {
-                  id: "2-1",
+                  id: "21",
                   label: "成员组3",
                   superiorNumber: "015",
                   remark: "xxxxx",
+                  plantNum: "10",
+                  actualNum: "5",
+                  DeptPic: "Baldwin",
+                  superiorDept: "人事部",
+                  DeptIdNum: "001",
                 },
                 {
-                  id: "2-2",
+                  id: "22",
                   label: "成员组4",
                   superiorNumber: "017",
                   remark: "xxxxx",
+                  plantNum: "10",
+                  actualNum: "5",
+                  DeptPic: "Baldwin",
+                  superiorDept: "人事部",
+                  DeptIdNum: "001",
                 },
               ],
             },
@@ -110,24 +138,38 @@ export default {
               DeptIdNum: "001",
               children: [
                 {
-                  id: "3-1",
+                  id: "31",
                   label: "成员组5",
                   superiorNumber: "020",
                   remark: "xxxxx",
+                  plantNum: "10",
+                  actualNum: "5",
+                  DeptPic: "Baldwin",
+                  superiorDept: "开发部",
+                  DeptIdNum: "001",
                 },
                 {
-                  id: "3-2",
+                  id: "32",
                   label: "成员组6",
                   superiorNumber: "021",
                   remark: "xxxxx",
+                  plantNum: "10",
+                  actualNum: "5",
+                  DeptPic: "Baldwin",
+                  superiorDept: "开发部",
+                  DeptIdNum: "001",
                 },
               ],
             },
           ],
         },
       ],
-
+      defaultProps: {
+        children: "children",
+        label: "label",
+      },
       tableData: [],
+      newTreeData: {},
     };
   },
   created() {
@@ -139,49 +181,17 @@ export default {
       this.showDialogs = true;
     },
 
+    handleNodeClick(data) {
+      console.log(data);
+    },
+
     changeData() {
       this.tableData = this.treeData[0].children;
     },
 
     getComponentsType(e, data) {
-      if (data) {
-        this.treeData[0].children.forEach((item) => {
-          if (item.label == data.superiorDept) {
-            data.label = data.DeptName;
-            if (!item.children) {
-              item.children = [];
-              item.children.push(data);
-            } else {
-              item.children.push(data);
-            }
-          }
-        });
-        // if (data.superiorDept == "公司") {
-        //   this.treeData.forEach((item) => {
-        //     if (item.label == data.superiorDept) {
-        //       data.label = data.DeptName;
-        //       if (!item.children) {
-        //         item.children = [];
-        //         item.children.push(data);
-        //       } else {
-        //         item.children.push(data);
-        //       }
-        //     }
-        //   });
-        // } else {
-        //   this.treeData[0].children.forEach((item) => {
-        //     if (item.label == data.superiorDept) {
-        //       data.label = data.DeptName;
-        //       if (!item.children) {
-        //         item.children = [];
-        //         item.children.push(data);
-        //       } else {
-        //         item.children.push(data);
-        //       }
-        //     }
-        //   });
-        // }
-      }
+      console.log(data);
+      
       this.showDialogs = e;
     },
   },

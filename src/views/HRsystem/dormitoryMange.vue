@@ -1,5 +1,10 @@
 <template>
   <div>
+    <div class="btns">
+      <el-button type="primary" around>增加宿舍</el-button>
+      <el-button type="primary" around>增加房间</el-button>
+      <el-button type="primary" around>增加床位</el-button>
+    </div>
     <div class="box">
       <div class="tree-area">
         <el-tree
@@ -243,42 +248,34 @@
                   align="center"
                 >
                 </el-table-column>
-                <el-table-column
-                  prop="domainNum"
-                  label="区域号"
-                  align="center"
-                >
+                <el-table-column prop="domainNum" label="区域号" align="center">
                 </el-table-column>
                 <el-table-column prop="roomNum" label="房间号" align="center">
                 </el-table-column>
-                <el-table-column prop="roomName" label="房间名称" align="center">
+                <el-table-column
+                  prop="roomName"
+                  label="房间名称"
+                  align="center"
+                >
                 </el-table-column>
                 <el-table-column prop="bedNum" label="床位数" align="center">
                 </el-table-column>
                 <el-table-column prop="shouldBe" label="应住数" align="center">
                 </el-table-column>
-                <el-table-column
-                  prop="gender"
-                  label="性别"
-                  align="center"
-                >
+                <el-table-column prop="gender" label="性别" align="center">
                 </el-table-column>
-                <el-table-column
-                  prop="typeof"
-                  label="类别"
-                  align="center"
-                >
+                <el-table-column prop="typeof" label="类别" align="center">
                 </el-table-column>
                 <el-table-column prop="desc" label="备注" align="center">
                 </el-table-column>
               </el-table>
             </div>
           </el-tab-pane>
-          <el-tab-pane label="更多操作" name="5">
+          <!-- <el-tab-pane label="更多操作" name="5">
             <el-button type="primary" around>增加宿舍</el-button>
             <el-button type="primary" around>增加房间</el-button>
             <el-button type="primary" around>增加床位</el-button>
-          </el-tab-pane>
+          </el-tab-pane> -->
         </el-tabs>
       </div>
     </div>
@@ -300,17 +297,19 @@ export default {
         },
       ],
       peopleInfoValue: "",
-      domainValue:'',
-      domainTableData:[{
-        domainNum:'02',
-        roomNum:'A208',
-        roomName:'A208',
-        bedNum:'4',
-        shouldBe:'4',
-        gender:'女',
-        typeof:'',
-        desc:'',
-      }],
+      domainValue: "",
+      domainTableData: [
+        {
+          domainNum: "02",
+          roomNum: "A208",
+          roomName: "A208",
+          bedNum: "4",
+          shouldBe: "4",
+          gender: "女",
+          typeof: "",
+          desc: "",
+        },
+      ],
       tableData: [
         {
           dormitoryNum: "001",
@@ -420,7 +419,7 @@ export default {
       if (data.id < 10 && data.id >= 1) {
         data.BuildingName = data.label;
         if (this.activeName == 4) {
-          this.domainValue = data.label
+          this.domainValue = data.label;
         }
         this.buildingForm = data;
       } else if (data.id > 10 && data.id < 100) {
@@ -442,6 +441,10 @@ export default {
 };
 </script>
 <style lang="less" scoped>
+.btns{
+  margin: 10px 10px 0;
+}
+
 .data-right {
   flex: 1;
   margin-top: 10px;

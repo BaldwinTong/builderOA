@@ -2,12 +2,7 @@
   <div>
     <!-- 职务 -->
     <div class="item">
-      <div
-        class="duties"
-        @mouseenter="changeSize"
-        v-for="item in treeData"
-        :key="item.id"
-      >
+      <div class="duties" v-for="item in treeData" :key="item.id">
         <el-tree
           :data="item.data"
           node-key="id"
@@ -18,14 +13,19 @@
         >
           <span class="custom-tree-node" slot-scope="{ node, data }">
             <span>{{ node.label }}</span>
-            <span v-if="node.level === 1" class="icont">
-              <el-button type="text" size="mini" @click="() => append(data)">
+            <span class="icont">
+              <el-button
+                type="text"
+                v-if="node.level === 1"
+                size="mini"
+                @click.stop.prevent="() => append(data)"
+              >
                 <i class="iconfont icon-tianjia"></i>
               </el-button>
               <el-button
                 type="text"
                 size="mini"
-                @click="() => remove(node, data)"
+                @click.stop.prevent="() => remove(node, data)"
               >
                 <i class="iconfont icon-shanchu"></i>
               </el-button>
@@ -34,10 +34,12 @@
         </el-tree>
       </div>
       <div class="duties addDuties">
-        <el-button type="primary" plain @click="addDuties">添加职称</el-button>
+        <el-button type="primary" plain @click="addDuties">添加</el-button>
       </div>
     </div>
-    <el-dialog title="添加职称" :visible.sync="dialogFormVisible" width="30%">
+
+    <!-- 添加 -->
+    <el-dialog title="添加" :visible.sync="dialogFormVisible" width="30%">
       <el-form :model="addDutiesForm" label-width="80px">
         <el-form-item label="职称：">
           <el-input
@@ -52,6 +54,55 @@
         <el-button type="primary" @click="conform">确 定</el-button>
       </div>
     </el-dialog>
+
+    <!-- 详情 -->
+    <el-dialog title="详情" :visible.sync="dialogDetailVisible" width="50%">
+      <el-form :model="DetailForm" label-width="80px">
+        <el-form-item label="序号">
+          <el-input
+            v-model="DetailForm.indexof"
+            :disabled="isdisable"
+            autocomplete="off"
+          ></el-input>
+        </el-form-item>
+        <el-form-item label="上级编码">
+          <el-input
+            v-model="DetailForm.hightLevel"
+            :disabled="isdisable"
+            autocomplete="off"
+          ></el-input>
+        </el-form-item>
+        <el-form-item label="名称">
+          <el-input
+            v-model="DetailForm.Dname"
+            :disabled="isdisable"
+            autocomplete="off"
+          ></el-input>
+        </el-form-item>
+        <el-form-item label="参数值">
+          <el-input
+            v-model="DetailForm.params"
+            :disabled="isdisable"
+            autocomplete="off"
+          ></el-input>
+        </el-form-item>
+        <el-form-item label="备注">
+          <el-input
+            type="textarea"
+            v-model="DetailForm.desc"
+            :disabled="isdisable"
+            autocomplete="off"
+          ></el-input>
+        </el-form-item>
+      </el-form>
+      <div class="btns">
+        <el-button type="primary" plain v-if="isdisable" @click="edit">编辑</el-button>
+        <div v-else>
+          <el-button type="primary" @click="editConform">确认</el-button>
+          <el-button type="info" @click="cancelEdit">取消</el-button>
+        </div>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
@@ -61,7 +112,9 @@ export default {
   props: {},
   data() {
     return {
+      isdisable: true,
       dialogFormVisible: false,
+      dialogDetailVisible: false,
       addDutiesForm: {
         name: "",
       },
@@ -133,10 +186,11 @@ export default {
           ],
         },
       ],
-      dutiesForm: {
-        num: "",
-        superiorNum: "",
-        duties: "",
+      DetailForm: {
+        indexof: "",
+        hightLevel: "",
+        Dname: "",
+        params: "",
         desc: "",
       },
     };
@@ -184,18 +238,36 @@ export default {
       const index = children.findIndex((d) => d.id === data.id);
       children.splice(index, 1);
     },
+    //查看详情
     handleNodeClick(data) {
-      let obj = JSON.parse(JSON.stringify(data));
-      this.dutiesForm.num = obj.id;
-      this.dutiesForm.superiorNum = obj.superiorNumber;
-      this.dutiesForm.duties = obj.label;
-      this.dutiesForm.desc = obj.remark;
+      if (!data.children) {
+        let obj = JSON.parse(JSON.stringify(data));
+        this.dialogDetailVisible = true;
+        this.DetailForm.indexof = obj.id;
+        this.DetailForm.hightLevel = obj.superiorNumber;
+        this.DetailForm.Dname = obj.label;
+        this.DetailForm.desc = obj.remark;
+      }
     },
-
+    //添加新职务
     addDuties() {
       this.dialogFormVisible = true;
     },
 
+    //可编辑
+    edit(){
+      this.isdisable = false
+    },
+    //不可编辑
+    cancelEdit(){
+      this.isdisable = true
+    },
+    //编辑确认
+    editConform(){
+      this.dialogDetailVisible = false;
+      this.isdisable = true
+    },
+    //提交
     conform() {
       let obj = {
         data: [
@@ -229,8 +301,6 @@ export default {
         this.$mess.warning("内容不能为空");
       }
     },
-
-    changeSize() {},
   },
   created() {},
   components: {},
