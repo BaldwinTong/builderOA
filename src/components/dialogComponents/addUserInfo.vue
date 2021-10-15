@@ -183,7 +183,47 @@
             </el-form-item>
           </el-form>
         </div>
+        <div class="checkWorkAttendance">
+          <h3 class="title">考勤、薪资资料</h3>
+          <el-form
+            :inline="true"
+            :model="checkAttInfoForm"
+            class="demo-form-inline"
+          >
+            <el-form-item label-width="100px" label="班次代码">
+              <el-input
+                placeholder="请输入"
+                v-model="checkAttInfoForm.Shift"
+              ></el-input>
+            </el-form-item>
+            <el-form-item label-width="100px" label="日历方案">
+              <el-input
+                placeholder="请输入"
+                v-model="checkAttInfoForm.calendarPlan"
+              ></el-input>
+            </el-form-item>
+            <el-form-item label-width="100px" label="自动倒班套">
+              <el-input
+                placeholder="请输入"
+                v-model="checkAttInfoForm.aotuShift"
+              ></el-input>
+            </el-form-item>
+            <el-form-item label-width="100px" label="日报公式套">
+              <el-input
+                placeholder="请输入"
+                v-model="checkAttInfoForm.dailyFormula"
+              ></el-input>
+            </el-form-item>
+            <el-form-item label-width="100px" label="薪资帐套">
+              <el-input
+                placeholder="请输入"
+                v-model="checkAttInfoForm.PayrollAccount"
+              ></el-input>
+            </el-form-item>
+          </el-form>
+        </div>
         <el-button size="small" @click="showDetail">显示详细信息</el-button>
+        <el-button size="small" @click="showCard">卡片管理</el-button>
       </div>
       <div class="headImage">
         <el-upload
@@ -224,12 +264,225 @@
           </div>
           <el-button type="primary" size="small">确定</el-button>
         </el-tab-pane>
-        <el-tab-pane label="教育及专业培训">教育及专业培训</el-tab-pane>
-        <el-tab-pane label="社会关系">社会关系</el-tab-pane>
-        <el-tab-pane label="证件（照片）">证件（照片）</el-tab-pane>
-        <el-tab-pane label="合同管理">合同管理</el-tab-pane>
-        <el-tab-pane label="考核成绩录入">考核成绩录入</el-tab-pane>
+        <el-tab-pane label="教育及专业培训">
+          <el-table :data="EduTrainingData" border style="width: 100%">
+            <el-table-column
+              type="index"
+              label="序号"
+              width="60px"
+              align="center"
+            >
+            </el-table-column>
+            <el-table-column prop="startDate" label="开始日期" align="center">
+            </el-table-column>
+            <el-table-column prop="endDate" label="结束日期" align="center">
+            </el-table-column>
+            <el-table-column
+              prop="school"
+              label="所在院校(培训机构)"
+              width="180px"
+              align="center"
+            >
+            </el-table-column>
+            <el-table-column prop="major" label="专业" align="center">
+            </el-table-column>
+            <el-table-column prop="SchoolSystem" label="学制" align="center">
+            </el-table-column>
+          </el-table>
+        </el-tab-pane>
+        <el-tab-pane label="社会关系">
+          <el-table :data="SocialRelationsData" border style="width: 100%">
+            <el-table-column
+              type="index"
+              label="序号"
+              width="60px"
+              align="center"
+            >
+            </el-table-column>
+            <el-table-column prop="name" label="姓名" align="center">
+            </el-table-column>
+            <el-table-column
+              prop="relationship"
+              label="关系"
+              width="70px"
+              align="center"
+            >
+            </el-table-column>
+            <el-table-column
+              prop="gender"
+              label="性别"
+              align="center"
+              width="60px"
+            >
+            </el-table-column>
+            <el-table-column
+              prop="workUnit"
+              label="工作单位"
+              width="120px"
+              align="center"
+            >
+            </el-table-column>
+            <el-table-column prop="duties" label="职务" align="center">
+            </el-table-column>
+            <el-table-column
+              prop="address"
+              label="联系地址"
+              width="180px"
+              align="center"
+            >
+            </el-table-column>
+            <el-table-column prop="phone" label="联系电话" align="center">
+            </el-table-column>
+          </el-table>
+        </el-tab-pane>
+        <el-tab-pane label="证件（照片）">
+          <div class="imageList">
+            <div class="item" v-for="item in 4" :key="item">
+              <img
+                src="https://img0.baidu.com/it/u=4125279608,444434243&fm=253&fmt=auto&app=120&f=JPEG?w=500&h=667"
+                alt=""
+              />
+              <p>图片{{ item }}</p>
+            </div>
+            <div class="item">
+              <div class="addimg">+</div>
+              <p>添加图片</p>
+            </div>
+          </div>
+        </el-tab-pane>
+        <el-tab-pane label="合同管理">
+          <el-table :data="contractData" border style="width: 100%">
+            <!-- <el-table-column
+              type="index"
+              label="序号"
+              width="60px"
+              align="center"
+            >
+            </el-table-column> -->
+            <el-table-column
+              prop="count"
+              label="次数"
+              width="60px"
+              align="center"
+            >
+            </el-table-column>
+            <el-table-column prop="contractNum" label="合同编号" align="center">
+            </el-table-column>
+            <el-table-column
+              prop="contractType"
+              label="合同类型"
+              align="center"
+            >
+            </el-table-column>
+            <el-table-column prop="symbol" label="标志" align="center">
+            </el-table-column>
+            <el-table-column prop="SigningDate" label="签订日期" align="center">
+            </el-table-column>
+            <el-table-column prop="limitY" label="限(年)" align="center">
+            </el-table-column>
+            <el-table-column prop="limitM" label="限(月)" align="center">
+            </el-table-column>
+            <el-table-column prop="startDate" label="生效日期" align="center">
+            </el-table-column>
+            <el-table-column prop="endDate" label="结束日期" align="center">
+            </el-table-column>
+          </el-table>
+        </el-tab-pane>
       </el-tabs>
+    </el-dialog>
+
+    <el-dialog
+      width="60%"
+      title="快速发卡"
+      :visible.sync="innerCardVisible"
+      append-to-body
+    >
+      <el-form
+        :inline="true"
+        :model="fastSendCardForm"
+        class="demo-form-inline"
+      >
+        <div class="fastSendCardFormItem">
+          <el-form-item label-width="100px" label="编号">
+            <el-input
+              v-model="fastSendCardForm.num"
+              placeholder="输入编号"
+            ></el-input>
+          </el-form-item>
+          <el-form-item label-width="100px" label="姓名">
+            <el-input
+              v-model="fastSendCardForm.name"
+              placeholder="输入姓名"
+            ></el-input>
+          </el-form-item>
+          <el-form-item label-width="100px" label="部门编号">
+            <el-input
+              v-model="fastSendCardForm.departmentNum"
+              placeholder="输入部门编号"
+            ></el-input>
+          </el-form-item>
+          <el-form-item label-width="100px" label="部门名称">
+            <el-input
+              v-model="fastSendCardForm.departmentName"
+              placeholder="输入部门名称"
+            ></el-input>
+          </el-form-item>
+          <el-form-item label-width="100px" label="卡号(指纹)">
+            <el-input
+              v-model="fastSendCardForm.cardNum"
+              placeholder="输入卡号"
+            ></el-input>
+          </el-form-item>
+          <el-form-item label-width="100px" label="记录号">
+            <el-input
+              v-model="fastSendCardForm.logNum"
+              placeholder="输入记录号"
+            ></el-input>
+          </el-form-item>
+          <el-form-item label-width="100px" label="状态">
+            <el-radio v-model="fastSendCardForm.status" label="1"
+              >有效</el-radio
+            >
+            <el-radio v-model="fastSendCardForm.status" label="2"
+              >无效</el-radio
+            >
+          </el-form-item>
+          <el-form-item label-width="100px" label="组别">
+            <el-input
+              v-model="fastSendCardForm.group"
+              placeholder="输入组别"
+            ></el-input>
+          </el-form-item>
+          <el-form-item label-width="100px" label="开始时间">
+            <el-date-picker
+              v-model="fastSendCardForm.startTime"
+              type="datetime"
+              placeholder="选择开始时间"
+            >
+            </el-date-picker>
+          </el-form-item>
+          <el-form-item label-width="100px" label="结束时间">
+            <el-date-picker
+              v-model="fastSendCardForm.endTime"
+              type="datetime"
+              placeholder="选择结束时间"
+            >
+            </el-date-picker>
+          </el-form-item>
+          <el-form-item label-width="80px" label="物理卡号">
+            <el-input
+              v-model="fastSendCardForm.PhysicsCardNum"
+              placeholder="输入物理卡号"
+            ></el-input>
+          </el-form-item>
+        </div>
+      </el-form>
+      <div class="fastSendCardBtns">
+        <el-button type="primary" plain>保存</el-button>
+        <el-button type="success" plain>连接端口</el-button>
+        <el-button type="success" plain>IC读卡</el-button>
+        <el-button type="info" plain>关闭</el-button>
+      </div>
     </el-dialog>
 
     <span slot="footer" class="dialog-footer">
@@ -256,6 +509,7 @@ export default {
     return {
       dialogVisible: false,
       innerVisible: false,
+      innerCardVisible: false,
       personInfoForm: {
         jobNum: "10001",
         name: "Dachui Wang",
@@ -285,6 +539,65 @@ export default {
         contractStartDate: "2021-7-7",
         contractEndDate: "2024-7-7",
       },
+      checkAttInfoForm: {
+        Shift: "",
+        calendarPlan: "",
+        aotuShift: "",
+        dailyFormula: "",
+        PayrollAccount: "",
+      },
+
+      //教育和专业培训表
+      EduTrainingData: [
+        {
+          startDate: "2021-1-1",
+          endDate: "2021-1-1",
+          school: "江南大学",
+          major: "人工智能",
+          SchoolSystem: "5年制",
+        },
+      ],
+      //社会关系表
+      SocialRelationsData: [
+        {
+          name: "王小锤",
+          relationship: "父子",
+          gender: "男",
+          workUnit: "五金厂",
+          duties: "销售",
+          address: "中山路220号",
+          phone: "13000000001",
+        },
+      ],
+
+      //合同管理表
+      contractData: [
+        {
+          count: "1",
+          contractNum: "011111",
+          contractType: "临时合同",
+          symbol: "xx",
+          SigningDate: "2021-10-15",
+          limitY: "2025",
+          limitM: "6",
+          startDate: "2021-10-16",
+          endDate: "2022-10-16",
+        },
+      ],
+
+      //快速发卡弹窗数据内容
+      fastSendCardForm: {
+        num: "",
+        name: "",
+        departmentNum: "",
+        departmentName: "",
+        cardNum: "",
+        logNum: "",
+        status: "1",
+        group: "",
+        startTime: "",
+        endTime: "",
+      },
       imageUrl: "",
       Headers: { "Access-Control-Allow-Origin": "*" },
     };
@@ -300,6 +613,9 @@ export default {
     },
     showDetail() {
       this.innerVisible = true;
+    },
+    showCard() {
+      this.innerCardVisible = true;
     },
     handleClose() {
       this.$emit("closeDialog", false);
@@ -398,7 +714,7 @@ export default {
   box-sizing: border-box;
   max-height: 150px;
   overflow: auto;
-  .workerItem{
+  .workerItem {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -407,11 +723,11 @@ export default {
   p {
     margin: 6px;
     padding: 6px;
-    .handle{
+    .handle {
       cursor: pointer;
       margin-left: 6px;
     }
-    .handle:hover{
+    .handle:hover {
       color: brown;
     }
   }
@@ -425,5 +741,44 @@ export default {
     margin: 8px 0;
   }
   margin-bottom: 4px;
+}
+
+.imageList {
+  //照片
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  .item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-right: 16px;
+    img {
+      width: 90px;
+      height: 98px;
+      margin-bottom: 4px;
+    }
+  }
+  .addimg {
+    width: 90px;
+    height: 98px;
+    text-align: center;
+    line-height: 98px;
+    font-size: 32px;
+    cursor: pointer;
+    margin-bottom: 4px;
+    border: 1px dashed #ccc;
+  }
+}
+
+//快速发卡弹窗
+.fastSendCardFormItem .el-form-item {
+  width: 320px !important;
+}
+
+.fastSendCardBtns{
+  display: flex;
+  justify-content: right;
 }
 </style>
