@@ -8,3 +8,5 @@ export { default as userInfo }
 from './userSpecificInfo.vue';
 export { default as reminder }
 from './reminder.vue';
+export { default as echarts }
+from './chart.vue';

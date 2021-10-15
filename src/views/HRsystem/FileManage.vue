@@ -27,7 +27,7 @@
         <reminder v-if="isChildUpdate5"></reminder>
       </el-tab-pane>
       <el-tab-pane label="分析图表" name="6">
-        
+        <echarts v-if="isChildUpdate6"></echarts>
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -40,6 +40,7 @@ import {
   personInfo,
   userInfo,
   reminder,
+  echarts
 } from "../../components/fileComponents";
 export default {
   data() {
@@ -51,6 +52,7 @@ export default {
       isChildUpdate3: false,
       isChildUpdate4: false,
       isChildUpdate5: false,
+      isChildUpdate6: false,
     };
   },
   components: {
@@ -59,9 +61,11 @@ export default {
     personInfo,
     userInfo,
     reminder,
+    echarts,
   },
   methods: {
     handleClick(tab) {
+      console.log(tab.index);
       if (tab.index == 0) {
         console.log("请求tab0数据");
         this.isChildUpdate1 = true
@@ -77,6 +81,10 @@ export default {
       } else if (tab.index == 4) {
         this.isChildUpdate5 = true
         console.log("请求tab4数据");
+        this.todo = 0;
+      } else if (tab.index == 5) {
+        this.isChildUpdate6 = true
+        console.log("请求tab6数据");
         this.todo = 0;
       }
     },
