@@ -3,7 +3,7 @@
     <el-menu
       class="el-menu-vertical-demo"
       router
-      :default-active="this.$route.path"
+      :default-active="this.$route.path" unique-opened
     >
       <el-submenu
         class="submenu"
@@ -57,7 +57,24 @@ export default {
               subTitle: "宿舍管理",
             },
           ],
-        },
+        },{
+          id: 2,
+          name: "/oneCardPass",
+          title: "一卡通管理",
+          icon: "icon-yinhangka",
+          subMenu:[
+            {
+              id: 21,
+              name: "/Hardware",
+              subTitle: "考勤硬件管理",
+            },
+            {
+              id: 22,
+              name: "/CardNum",
+              subTitle: "卡号编号表",
+            },
+          ],
+        }
       ],
     };
   },
@@ -91,7 +108,7 @@ html {
   min-width: 180px !important;
 }
 
-.icon-HRrenshirenshiguanli {
+.icon-HRrenshirenshiguanli,.icon-yinhangka {
   font-size: 20px !important;
   margin-right: 8px;
 }

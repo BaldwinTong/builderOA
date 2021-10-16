@@ -5,12 +5,12 @@
         <el-radio :label="1">性别统计</el-radio>
         <el-radio :label="2">年龄统计</el-radio>
         <el-radio :label="3">籍贯统计</el-radio>
-        <el-radio :label="4">学历统计</el-radio>
+        <!-- <el-radio :label="4">学历统计</el-radio>
         <el-radio :label="5">工龄统计</el-radio>
         <el-radio :label="6">人员性质统计</el-radio>
         <el-radio :label="7">职等统计</el-radio>
         <el-radio :label="8">婚姻状况统计</el-radio>
-        <el-radio :label="9">离职统计</el-radio>
+        <el-radio :label="9">离职统计</el-radio> -->
       </el-radio-group>
     </div>
     <div class="chart">
@@ -26,7 +26,9 @@ export default {
     return {
       tab: 1,
       gender: ["全部", "开发部", "技术部", "人事部"],
-      age: [""],
+      age: ['18~25岁', '20~30岁', '30~35岁', '35~40岁', '40~45岁', '50岁以上'],
+      NativePlace:['北京市','广东省','广西省','河北省','湖北省','湖南省'],
+
     };
   },
   created() {},
@@ -36,18 +38,16 @@ export default {
       window.onresize = () => {
         this.$echarts.init(document.getElementById("myChart")).resize();
       };
-      console.log(1231);
     }, 200);
   },
   methods: {
     drawLine(options) {
       // 基于准备好的dom，初始化echarts实例
       let myChart = this.$echarts.init(document.getElementById("myChart"));
-      console.log(options);
       // 绘制图表
       if (options) {
-        myChart.setOption(options);
-      } else {
+        myChart.setOption(options,true);
+      } else if(!options && this.tab==1) {
         myChart.setOption({
           title: { text: "性别统计", left: "center" },
           tooltip: {},
@@ -67,11 +67,11 @@ export default {
               data: [5, 20, 36, 10, 10, 20],
             },
           ],
-        });
+        },true);
       }
     },
     change(e) {
-        var options;
+      var options;
       if (e == 1) {
         options = {
           title: { text: "性别统计", left: "center" },
@@ -98,22 +98,34 @@ export default {
           title: { text: "年龄统计", left: "center" },
           tooltip: {},
           xAxis: {
-            data: this.gender,
+            data: this.age,
           },
           yAxis: {},
           series: [
             {
-              name: "男",
+              name: "人数",
               type: "bar",
-              data: [5, 20, 36, 10, 10, 18],
-            },
-            {
-              name: "女",
-              type: "bar",
-              data: [5, 20, 36, 10, 10, 20],
-            },
+              data: [5, 6, 7, 8, 9, 10],
+            }
           ],
         };
+      }else if (e==3) {
+        options = {
+          title: { text: "籍贯统计", left: "center" },
+          tooltip: {},
+          xAxis: {
+            data: this.NativePlace,
+          },
+          yAxis: {},
+          series: [
+            {
+              name: "人数",
+              type: "bar",
+              data: [5, 6, 7, 8, 9, 10],
+            }
+          ],
+        };
+        
       }
       this.drawLine(options);
     },

@@ -10,6 +10,12 @@ import personnelOperation from '../views/HRsystem/personnelOperation.vue' //人�
 import RewardAPunishManage from '../views/HRsystem/RewardAPunishManage.vue' //奖惩管理
 import dormitoryMange from '../views/HRsystem/dormitoryMange.vue' //宿舍管理
 
+//一卡通 
+import Hardware from '../views/oneCardPass/Hardware.vue' //硬件管理
+import CardNum from '../views/oneCardPass/EmployeeCardNumber' //卡号编卡表
+
+
+
 
 
 Vue.use(VueRouter)
@@ -43,6 +49,15 @@ const routes = [{
             path: '/dormitoryMange',
             name: 'dormitoryMange',
             component: dormitoryMange
+        }, {
+            path: '/Hardware',
+            name: 'Hardware',
+            component: Hardware
+
+        }, {
+            path: '/CardNum',
+            name: 'CardNum',
+            component: CardNum
         }]
     }, {
         path: '/login',
