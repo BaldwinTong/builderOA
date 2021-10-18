@@ -66,7 +66,7 @@ export default {
             {
               id: 21,
               name: "/Hardware",
-              subTitle: "考勤硬件管理",
+              subTitle: "硬件管理",
             },
             {
               id: 22,

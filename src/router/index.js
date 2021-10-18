@@ -12,8 +12,10 @@ import dormitoryMange from '../views/HRsystem/dormitoryMange.vue' //宿舍管理
 
 //一卡通 
 import Hardware from '../views/oneCardPass/Hardware.vue' //硬件管理
-import CardNum from '../views/oneCardPass/EmployeeCardNumber' //卡号编卡表
+import hardwareFile from '../views/oneCardPass/hardwareFile.vue' //硬件档案
+import hardwareSet from '../views/oneCardPass/hardwareSet.vue' //硬件设置
 
+import CardNum from '../views/oneCardPass/EmployeeCardNumber.vue' //卡号编卡表
 
 
 
@@ -52,12 +54,19 @@ const routes = [{
         }, {
             path: '/Hardware',
             name: 'Hardware',
-            component: Hardware
-
+            component: Hardware,
         }, {
             path: '/CardNum',
             name: 'CardNum',
             component: CardNum
+        }, {
+            path: '/hardwareFile',
+            name: 'hardwareFile',
+            component: hardwareFile,
+        }, {
+            path: '/hardwareSet',
+            name: 'hardwareSet',
+            component: hardwareSet,
         }]
     }, {
         path: '/login',

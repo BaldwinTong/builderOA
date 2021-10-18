@@ -1,19 +1,18 @@
 <template>
   <div>
-    <!-- 考勤机档案  考勤机设置  考勤机下载 考勤数据采集 -->
     <div class="pages">
       <div class="tabs">
-        <div class="tabs-item">
+        <div class="tabs-item" @click="topage('hardwareFile')">
           <i class="iconfont icon-case-file-full"></i>
-          <p>考勤机档案</p>
+          <p>硬件档案</p>
         </div>
-        <div class="tabs-item">
-          <i class="iconfont icon-shezhi"></i> 考勤机设置
+        <div class="tabs-item" @click="topage('hardwareSet')">
+          <i class="iconfont icon-shezhi"></i> 硬件设置
         </div>
-        <div class="tabs-item">
-          <i class="iconfont icon-xiazai"></i> 考勤机下载
+        <div class="tabs-item" @click="topage('hardwareSet')">
+          <i class="iconfont icon-xiazai"></i> 考勤卡下载
         </div>
-        <div class="tabs-item">
+        <div class="tabs-item" @click="topage('hardwareSet')">
           <i class="iconfont icon-shujucaiji"></i> 考勤数据采集
         </div>
       </div>
@@ -45,7 +44,11 @@ export default {
     };
   },
   created() {},
-  methods: {},
+  methods: {
+    topage(str){
+      this.$router.push(str)
+    }
+  },
   computed: {},
 };
 </script>
