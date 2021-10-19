@@ -9,10 +9,10 @@
         <div class="tabs-item" @click="topage('hardwareSet')">
           <i class="iconfont icon-shezhi"></i> 硬件设置
         </div>
-        <div class="tabs-item" @click="topage('hardwareSet')">
+        <div class="tabs-item" @click="topage('downKq')">
           <i class="iconfont icon-xiazai"></i> 考勤卡下载
         </div>
-        <div class="tabs-item" @click="topage('hardwareSet')">
+        <div class="tabs-item" @click="topage('dataCollect')">
           <i class="iconfont icon-shujucaiji"></i> 考勤数据采集
         </div>
       </div>

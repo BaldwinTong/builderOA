@@ -74,6 +74,18 @@ export default {
               subTitle: "卡号编号表",
             },
           ],
+        },{
+          id: 3,
+          name: "/checkWorkAttendance",
+          title: "考勤系统",
+          icon: "icon-kaoqin",
+          subMenu:[
+            {
+              id: 31,
+              name: "/Attend",
+              subTitle: "考勤设置",
+            }
+          ],
         }
       ],
     };
@@ -108,7 +120,7 @@ html {
   min-width: 180px !important;
 }
 
-.icon-HRrenshirenshiguanli,.icon-yinhangka {
+.icon-HRrenshirenshiguanli,.icon-yinhangka, .icon-kaoqin {
   font-size: 20px !important;
   margin-right: 8px;
 }

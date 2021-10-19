@@ -14,10 +14,12 @@ import dormitoryMange from '../views/HRsystem/dormitoryMange.vue' //宿舍管理
 import Hardware from '../views/oneCardPass/Hardware.vue' //硬件管理
 import hardwareFile from '../views/oneCardPass/hardwareFile.vue' //硬件档案
 import hardwareSet from '../views/oneCardPass/hardwareSet.vue' //硬件设置
+import downKq from '../views/oneCardPass/downKq.vue' //考勤卡下载
+import dataCollect from '../views/oneCardPass/dataCollect.vue' //考勤卡下载
 
 import CardNum from '../views/oneCardPass/EmployeeCardNumber.vue' //卡号编卡表
 
-
+import Attend from '../views/checkWorkAttendance/attendanceSet.vue' //考勤设置
 
 
 Vue.use(VueRouter)
@@ -39,6 +41,10 @@ const routes = [{
             path: '/FileManage',
             name: 'FileManage',
             component: FileManage
+        }, {
+            path: '/Attend',
+            name: 'Attend',
+            component: Attend
         }, {
             path: '/personnelOperation',
             name: 'personnelOperation',
@@ -67,6 +73,14 @@ const routes = [{
             path: '/hardwareSet',
             name: 'hardwareSet',
             component: hardwareSet,
+        }, {
+            path: '/downKq',
+            name: 'downKq',
+            component: downKq,
+        }, {
+            path: '/dataCollect',
+            name: 'dataCollect',
+            component: dataCollect,
         }]
     }, {
         path: '/login',

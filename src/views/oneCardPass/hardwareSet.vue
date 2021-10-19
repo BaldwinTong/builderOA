@@ -3,7 +3,7 @@
     <div class="crumbs">
       <el-breadcrumb separator-class="el-icon-arrow-right">
         <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-        <el-breadcrumb-item>硬件管理</el-breadcrumb-item>
+        <el-breadcrumb-item :to="{ path: '/Hardware' }">硬件管理</el-breadcrumb-item>
         <el-breadcrumb-item>硬件设置</el-breadcrumb-item>
       </el-breadcrumb>
     </div>
@@ -42,8 +42,8 @@
                   </el-select>
                 </el-form-item>
                 <el-form-item class="btns">
-                  <el-button type="primary" @click="onText">测试</el-button>
-                  <el-button type="primary" @click="onSet">设置</el-button>
+                  <el-button type="primary" size="small" @click="onText">测试</el-button>
+                  <el-button type="primary" size="small" @click="onSet">设置</el-button>
                 </el-form-item>
               </el-form>
             </div>
@@ -70,8 +70,8 @@
                   </el-select>
                 </el-form-item>
                 <el-form-item class="btns">
-                  <el-button type="primary" @click="onText">测试</el-button>
-                  <el-button type="primary" @click="onSet">设置</el-button>
+                  <el-button type="primary" size="small" @click="onText">测试</el-button>
+                  <el-button type="primary" size="small" @click="onSet">设置</el-button>
                 </el-form-item>
               </el-form>
             </div>
@@ -98,8 +98,8 @@
                   </el-select>
                 </el-form-item>
                 <el-form-item class="btns">
-                  <el-button type="primary" @click="onText">测试</el-button>
-                  <el-button type="primary" @click="onSet">设置</el-button>
+                  <el-button type="primary" size="small" @click="onText">测试</el-button>
+                  <el-button type="primary" size="small" @click="onSet">设置</el-button>
                 </el-form-item>
               </el-form>
             </div>
@@ -126,8 +126,8 @@
                   </el-select>
                 </el-form-item>
                 <el-form-item class="btns">
-                  <el-button type="primary" @click="onText">测试</el-button>
-                  <el-button type="primary" @click="onSet">设置</el-button>
+                  <el-button type="primary" size="small" @click="onText">测试</el-button>
+                  <el-button type="primary" size="small" @click="onSet">设置</el-button>
                 </el-form-item>
               </el-form>
             </div>
@@ -154,8 +154,8 @@
                   </el-select>
                 </el-form-item>
                 <el-form-item class="btns">
-                  <el-button type="primary" @click="onText">测试</el-button>
-                  <el-button type="primary" @click="onSet">设置</el-button>
+                  <el-button type="primary" size="small" @click="onText">测试</el-button>
+                  <el-button type="primary" size="small" @click="onSet">设置</el-button>
                 </el-form-item>
               </el-form>
             </div>
@@ -164,15 +164,15 @@
             <p class="title">设置</p>
             <div class="con-item">
               <div class="btns">
-                <el-button type="primary">测试机器</el-button>
+                <el-button type="primary" size="small">测试机器</el-button>
                 <span>测试机器是否正常连接</span>
               </div>
               <div class="btns">
-                <el-button type="primary">设置时间</el-button>
+                <el-button type="primary" size="small">设置时间</el-button>
                 <span>将当前时间设置成机器的时间</span>
               </div>
               <div class="btns">
-                <el-button type="primary">清除数据</el-button>
+                <el-button type="primary" size="small">清除数据</el-button>
                 <span class="danger">清除机器上的数据(慎用)</span>
               </div>
             </div>
