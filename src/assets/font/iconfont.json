@@ -6,6 +6,13 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "1727411",
+      "name": "49计算器、利率-线性",
+      "font_class": "jisuanqilishuai-xianxing",
+      "unicode": "e8b4",
+      "unicode_decimal": 59572
+    },
+    {
       "icon_id": "8159876",
       "name": "考勤",
       "font_class": "kaoqin",

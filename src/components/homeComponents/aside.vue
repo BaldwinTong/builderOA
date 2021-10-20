@@ -3,7 +3,8 @@
     <el-menu
       class="el-menu-vertical-demo"
       router
-      :default-active="this.$route.path" unique-opened
+      :default-active="this.$route.path"
+      unique-opened
     >
       <el-submenu
         class="submenu"
@@ -57,12 +58,13 @@ export default {
               subTitle: "宿舍管理",
             },
           ],
-        },{
+        },
+        {
           id: 2,
           name: "/oneCardPass",
           title: "一卡通管理",
           icon: "icon-yinhangka",
-          subMenu:[
+          subMenu: [
             {
               id: 21,
               name: "/Hardware",
@@ -74,24 +76,58 @@ export default {
               subTitle: "卡号编号表",
             },
           ],
-        },{
+        },
+        {
           id: 3,
           name: "/checkWorkAttendance",
-          title: "考勤系统",
+          title: "考勤设置",
           icon: "icon-kaoqin",
-          subMenu:[
+          subMenu: [
             {
               id: 31,
               name: "/Attend",
-              subTitle: "考勤设置",
-            }
+              subTitle: "基础设置",
+            },
+            {
+              id: 32,
+              name: "/Scheduling",
+              subTitle: "排班管理",
+            },
+            {
+              id: 33,
+              name: "/KqScheme",
+              subTitle: "考勤方案",
+            },
           ],
-        }
+        },
+        {
+          id: 4,
+          name: "/CheckWorkCompute",
+          title: "考勤计算",
+          icon: "icon-jisuanqilishuai-xianxing",
+          subMenu:[
+            {
+              id: 41,
+              name: "/swipeCardLog",
+              subTitle: "员工刷卡记录",
+            },
+            {
+              id: 42,
+              name: "/KqBill",
+              subTitle: "考勤单据管理",
+            },
+            {
+              id: 43,
+              name: "/DailyPaperFormula",
+              subTitle: "日报公式",
+            },
+
+          ]
+        },
       ],
     };
   },
-  created() {
-  },
+  created() {},
   methods: {},
 };
 </script>
@@ -120,7 +156,10 @@ html {
   min-width: 180px !important;
 }
 
-.icon-HRrenshirenshiguanli,.icon-yinhangka, .icon-kaoqin {
+.icon-HRrenshirenshiguanli,
+.icon-yinhangka,
+.icon-kaoqin,
+.icon-jisuanqilishuai-xianxing {
   font-size: 20px !important;
   margin-right: 8px;
 }

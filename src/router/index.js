@@ -20,6 +20,13 @@ import dataCollect from '../views/oneCardPass/dataCollect.vue' //考勤卡下载
 import CardNum from '../views/oneCardPass/EmployeeCardNumber.vue' //卡号编卡表
 
 import Attend from '../views/checkWorkAttendance/attendanceSet.vue' //考勤设置
+import Scheduling from '../views/checkWorkAttendance/Scheduling.vue' //考勤管理
+import KqScheme from '../views/checkWorkAttendance/KqScheme.vue' //考勤方案
+
+import swipeCardLog from '../views/CheckWorkCompute/swipeCardLog.vue' //员工刷卡记录
+import KqBill from '../views/CheckWorkCompute/KqBill.vue' //考勤单据
+import DailyPaperFormula from '../views/CheckWorkCompute/DailyPaperFormula.vue' //日报公式
+
 
 
 Vue.use(VueRouter)
@@ -81,6 +88,26 @@ const routes = [{
             path: '/dataCollect',
             name: 'dataCollect',
             component: dataCollect,
+        }, {
+            path: '/Scheduling',
+            name: 'Scheduling',
+            component: Scheduling,
+        }, {
+            path: '/KqScheme',
+            name: 'KqScheme',
+            component: KqScheme,
+        }, {
+            path: '/swipeCardLog',
+            name: 'swipeCardLog',
+            component: swipeCardLog,
+        }, {
+            path: '/KqBill',
+            name: 'KqBill',
+            component: KqBill,
+        }, {
+            path: '/DailyPaperFormula',
+            name: 'DailyPaperFormula',
+            component: DailyPaperFormula,
         }]
     }, {
         path: '/login',
