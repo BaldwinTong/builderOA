@@ -227,17 +227,214 @@
                   <input class="inpt" v-model="shiftForm.outWorktime1" />
                 </el-form-item>
                 <el-form-item class="formItem" label="上班可不刷">
-                  <div style="width:100px;">
-                    <el-checkbox v-model="shiftForm.gotoWorknoswipe"></el-checkbox>
+                  <div style="width: 100px">
+                    <el-checkbox
+                      v-model="shiftForm.gotoWorknoswipe"
+                    ></el-checkbox>
                   </div>
                 </el-form-item>
                 <el-form-item class="formItem" label="下班可不刷">
-                  <div style="width:100px;">
-                    <el-checkbox v-model="shiftForm.gooffWorknoswipe"></el-checkbox>
+                  <div style="width: 100px">
+                    <el-checkbox
+                      v-model="shiftForm.gooffWorknoswipe"
+                    ></el-checkbox>
                   </div>
                 </el-form-item>
                 <el-form-item class="formItem">
                   <p>上班时间1有效范围</p>
+                  <div class="rangeCont">
+                    <div>
+                      <span>前</span
+                      ><input
+                        class="range"
+                        type="text"
+                        v-model="shiftForm.toWorkBeforRange"
+                      />
+                    </div>
+                    <div>
+                      <span class="after">后</span
+                      ><input
+                        class="range"
+                        type="text"
+                        v-model="shiftForm.toWorkAfterRange"
+                      />
+                    </div>
+                  </div>
+                </el-form-item>
+                <el-form-item class="formItem">
+                  <p>下班时间1有效范围</p>
+                  <div class="rangeCont">
+                    <div>
+                      <span>前</span
+                      ><input
+                        class="range"
+                        type="text"
+                        v-model="shiftForm.outWorkBeforRange"
+                      />
+                    </div>
+                    <div>
+                      <span class="after">后</span
+                      ><input
+                        class="range"
+                        type="text"
+                        v-model="shiftForm.outWorkAfterRange"
+                      />
+                    </div>
+                  </div>
+                </el-form-item>
+                <el-form-item class="formItem" label="是加班时段">
+                  <div style="width: 100px">
+                    <el-checkbox v-model="shiftForm.overworkTime"></el-checkbox>
+                  </div>
+                </el-form-item>
+                <el-form-item class="formItem" label="中间休息">
+                  <input class="inpt" v-model="shiftForm.middleRest" />
+                </el-form-item>
+              </div>
+              <div class="timeInterval">
+                <p class="title">时段2</p>
+                <el-form-item class="formItem" label="上班时间2">
+                  <input class="inpt" v-model="shiftForm.getWorktime1" />
+                </el-form-item>
+                <el-form-item class="formItem" label="下班时间2">
+                  <input class="inpt" v-model="shiftForm.outWorktime1" />
+                </el-form-item>
+                <el-form-item class="formItem" label="上班可不刷">
+                  <div style="width: 100px">
+                    <el-checkbox
+                      v-model="shiftForm.gotoWorknoswipe"
+                    ></el-checkbox>
+                  </div>
+                </el-form-item>
+                <el-form-item class="formItem" label="下班可不刷">
+                  <div style="width: 100px">
+                    <el-checkbox
+                      v-model="shiftForm.gooffWorknoswipe"
+                    ></el-checkbox>
+                  </div>
+                </el-form-item>
+                <el-form-item class="formItem">
+                  <p>上班时间1有效范围</p>
+                  <div class="rangeCont">
+                    <div>
+                      <span>前</span
+                      ><input
+                        class="range"
+                        type="text"
+                        v-model="shiftForm.toWorkBeforRange"
+                      />
+                    </div>
+                    <div>
+                      <span class="after">后</span
+                      ><input
+                        class="range"
+                        type="text"
+                        v-model="shiftForm.toWorkAfterRange"
+                      />
+                    </div>
+                  </div>
+                </el-form-item>
+                <el-form-item class="formItem">
+                  <p>下班时间1有效范围</p>
+                  <div class="rangeCont">
+                    <div>
+                      <span>前</span
+                      ><input
+                        class="range"
+                        type="text"
+                        v-model="shiftForm.outWorkBeforRange"
+                      />
+                    </div>
+                    <div>
+                      <span class="after">后</span
+                      ><input
+                        class="range"
+                        type="text"
+                        v-model="shiftForm.outWorkAfterRange"
+                      />
+                    </div>
+                  </div>
+                </el-form-item>
+                <el-form-item class="formItem" label="是加班时段">
+                  <div style="width: 100px">
+                    <el-checkbox v-model="shiftForm.overworkTime"></el-checkbox>
+                  </div>
+                </el-form-item>
+                <el-form-item class="formItem" label="中间休息">
+                  <input class="inpt" v-model="shiftForm.middleRest" />
+                </el-form-item>
+              </div>
+              <div class="timeInterval">
+                <p class="title">时段3</p>
+                <el-form-item class="formItem" label="上班时间3">
+                  <input class="inpt" v-model="shiftForm.getWorktime1" />
+                </el-form-item>
+                <el-form-item class="formItem" label="下班时间3">
+                  <input class="inpt" v-model="shiftForm.outWorktime1" />
+                </el-form-item>
+                <el-form-item class="formItem" label="上班可不刷">
+                  <div style="width: 100px">
+                    <el-checkbox
+                      v-model="shiftForm.gotoWorknoswipe"
+                    ></el-checkbox>
+                  </div>
+                </el-form-item>
+                <el-form-item class="formItem" label="下班可不刷">
+                  <div style="width: 100px">
+                    <el-checkbox
+                      v-model="shiftForm.gooffWorknoswipe"
+                    ></el-checkbox>
+                  </div>
+                </el-form-item>
+                <el-form-item class="formItem">
+                  <p>上班时间1有效范围</p>
+                  <div class="rangeCont">
+                    <div>
+                      <span>前</span
+                      ><input
+                        class="range"
+                        type="text"
+                        v-model="shiftForm.toWorkBeforRange"
+                      />
+                    </div>
+                    <div>
+                      <span class="after">后</span
+                      ><input
+                        class="range"
+                        type="text"
+                        v-model="shiftForm.toWorkAfterRange"
+                      />
+                    </div>
+                  </div>
+                </el-form-item>
+                <el-form-item class="formItem">
+                  <p>下班时间1有效范围</p>
+                  <div class="rangeCont">
+                    <div>
+                      <span>前</span
+                      ><input
+                        class="range"
+                        type="text"
+                        v-model="shiftForm.outWorkBeforRange"
+                      />
+                    </div>
+                    <div>
+                      <span class="after">后</span
+                      ><input
+                        class="range"
+                        type="text"
+                        v-model="shiftForm.outWorkAfterRange"
+                      />
+                    </div>
+                  </div>
+                </el-form-item>
+                <el-form-item class="formItem" label="是加班时段">
+                  <div style="width: 100px">
+                    <el-checkbox v-model="shiftForm.overworkTime"></el-checkbox>
+                  </div>
+                </el-form-item>
+                <el-form-item class="formItem" label="中间休息">
+                  <input class="inpt" v-model="shiftForm.middleRest" />
                 </el-form-item>
               </div>
             </div>
@@ -301,8 +498,14 @@ export default {
         afterDaySpan: false,
         getWorktime1: "",
         outWorktime1: "",
-        gotoWorknoswipe:false,
-        gooffWorknoswipe:false,
+        gotoWorknoswipe: false,
+        gooffWorknoswipe: false,
+        toWorkBeforRange: "",
+        toWorkAfterRange: "",
+        outWorkBeforRange: "",
+        outWorkAfterRange: "",
+        overworkTime: false,
+        middleRest: "",
       },
     };
   },
@@ -472,36 +675,59 @@ export default {
   .el-divider--horizontal {
     margin: 0;
   }
-  .timeInterval {
-    width: 200px;
-    min-height: 40px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    position: relative;
-    padding: 6px;
-    box-sizing: border-box;
-    .title {
-      width: 46px;
-      height: 24px;
-      background-color: #fff;
-      text-align: center;
-      line-height: 24px;
-      position: absolute;
-      top: -12px;
-      left: 10px;
-    }
-    .formItem {
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-bottom: 0;
-      margin-top: 0;
-      .inpt {
-        width: 100px;
+  .intervalBox {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    .timeInterval {
+      width: 200px;
+      min-height: 40px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      position: relative;
+      padding: 6px;
+      box-sizing: border-box;
+      .title {
+        width: 46px;
+        height: 24px;
+        background-color: #fff;
+        text-align: center;
+        line-height: 24px;
+        position: absolute;
+        top: -12px;
+        left: 10px;
       }
-      /deep/ .el-form-item__label {
-        width: 76px !important;
+      .formItem {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 0;
+        margin-top: 0;
+        .inpt {
+          width: 100px;
+        }
+        /deep/ .el-form-item__label {
+          width: 76px !important;
+        }
+        p {
+          height: 25px;
+          line-height: 25px;
+          text-align: center;
+        }
+        .rangeCont {
+          line-height: 25px;
+          height: 25px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          .after {
+            margin-left: 15px;
+          }
+        }
+        .range {
+          width: 40px;
+        }
       }
     }
   }
