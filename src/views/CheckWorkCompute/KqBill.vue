@@ -1,38 +1,55 @@
 <template>
-  <div class="echart-page">
-    <div class="tabList">
-      <div class="tab-item">单据设置</div>
-      <div class="tab-item">请假单录入</div>
-      <div class="tab-item">加班单录入</div>
-      <div class="tab-item">转班单录入</div>
-    </div>
-    <div class="content">
-      <div class="chart-item">
-        <div class="chart">
-          <div id="myChart" style="width: 100%; height: 350px"></div>
+  <div>
+    <div>
+      <div class="tabList">
+        <div class="tab-item" @click="toBillSet">单据设置</div>
+        <div class="tab-item">请假单录入</div>
+        <div class="tab-item">加班单录入</div>
+        <div class="tab-item">转班单录入</div>
+      </div>
+      <div class="content">
+        <div class="chart-item">
+          <div class="chart">
+            <div id="myChart" style="width: 100%; height: 350px"></div>
+          </div>
+        </div>
+        <div class="chart-item">
+          <div class="chart">
+            <div id="overTime" style="width: 100%; height: 350px"></div>
+          </div>
         </div>
       </div>
-      <div class="chart-item">
-        <div class="chart">
-          <div id="overTime" style="width: 100%; height: 350px"></div>
-        </div>
-      </div>
     </div>
+    <bill-set
+      v-if="isShowSet"
+      @changetype="changetype"
+      :isshow="isShowSet"
+    ></bill-set>
   </div>
 </template>
 
 <script>
+import billSet from "./components/billSet.vue";
 export default {
-  components: {},
+  components: {
+    billSet,
+  },
   data() {
-    return {};
+    return {
+      isShowSet: false,
+    };
   },
   created() {},
   mounted() {
     this.leave();
     this.overTime();
   },
+
   methods: {
+    // 跳转
+    toBillSet() {
+      this.isShowSet = true;
+    },
     leave() {
       // 基于准备好的dom，初始化echarts实例
       let myChart = this.$echarts.init(document.getElementById("myChart"));
@@ -116,14 +133,14 @@ export default {
         ],
       });
     },
+    changetype(e) {
+      this.isShowSet = e;
+    },
   },
   computed: {},
 };
 </script>
 <style lang='less' scoped>
-.echart-page{
-  background-color: #f8f8f8;
-}
 .tabList {
   width: 100%;
   padding: 16px;
@@ -160,14 +177,14 @@ export default {
     text-align: center;
     line-height: 80px;
     border-radius: 8px;
-    background-color: #ffff;
+    background-color: #3fdff7;
     cursor: pointer;
     overflow: hidden;
-    color: #22223E;
+    color: #22223e;
     transition: all 0.5s;
   }
 
-  .tab-item:hover{
+  .tab-item:hover {
     scale: 1.1;
   }
 }

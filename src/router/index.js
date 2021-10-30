@@ -29,6 +29,7 @@ import DailyPaperFormula from '../views/CheckWorkCompute/DailyPaperFormula.vue' 
 
 
 
+
 Vue.use(VueRouter)
 const routes = [{
         path: '/',
@@ -100,10 +101,12 @@ const routes = [{
             path: '/swipeCardLog',
             name: 'swipeCardLog',
             component: swipeCardLog,
+
         }, {
             path: '/KqBill',
             name: 'KqBill',
             component: KqBill,
+
         }, {
             path: '/DailyPaperFormula',
             name: 'DailyPaperFormula',
