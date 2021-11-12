@@ -1,19 +1,28 @@
 <template>
-  <div></div>
+  <div>
+    <div>
+      <calendar></calendar>
+    </div>
+  </div>
 </template>
 
 <script>
+import calendar from "../../components/calendar/calen.vue"
 export default {
-  components: {},
-  data () {
+  components: {
+    calendar
+  },
+  data() {
     return {
+      
     };
   },
-  created(){},
-  methods: {},
+  created() {},
+  methods: {
+    
+  },
   computed: {},
-}
-
+};
 </script>
 <style lang='less' scoped>
 </style>

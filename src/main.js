@@ -11,6 +11,7 @@ import OnlyMessage from './utils/onlyMSGbox'
 Vue.prototype.$mess = OnlyMessage
 Vue.prototype.$echarts = echarts
 Vue.prototype.$http = axios
+
 Vue.use(ElementUI)
 Vue.config.productionTip = false
 
