@@ -124,6 +124,24 @@ export default {
 
           ]
         },
+        {
+          id: 5,
+          name: "/statisticalControl",
+          title: "统计管理",
+          icon: "icon-tongji",
+          subMenu:[
+            {
+              id: 51,
+              name: "/checkWAStatistical",
+              subTitle: "考勤日报",
+            },
+            {
+              id: 52,
+              name: "/checkWASummary",
+              subTitle: "考勤汇总",
+            }
+          ]
+        },
       ],
     };
   },
@@ -159,7 +177,8 @@ html {
 .icon-HRrenshirenshiguanli,
 .icon-yinhangka,
 .icon-kaoqin,
-.icon-jisuanqilishuai-xianxing {
+.icon-jisuanqilishuai-xianxing,
+.icon-tongji {
   font-size: 20px !important;
   margin-right: 8px;
 }

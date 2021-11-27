@@ -12,6 +12,9 @@ Vue.prototype.$mess = OnlyMessage
 Vue.prototype.$echarts = echarts
 Vue.prototype.$http = axios
 
+// import Vant from 'vant';
+// import 'vant/lib/index.css';
+// Vue.use(Vant);
 Vue.use(ElementUI)
 Vue.config.productionTip = false
 

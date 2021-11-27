@@ -27,6 +27,8 @@ import swipeCardLog from '../views/CheckWorkCompute/swipeCardLog.vue' //员工�
 import KqBill from '../views/CheckWorkCompute/KqBill.vue' //考勤单据
 import DailyPaperFormula from '../views/CheckWorkCompute/DailyPaperFormula.vue' //日报公式
 
+import checkWAStatistical from "../views/StatisticalManage/checkWAStatistical.vue" //考勤日报
+import checkWASummary from "../views/StatisticalManage/checkWASummary.vue" //考勤汇总
 
 
 
@@ -111,6 +113,14 @@ const routes = [{
             path: '/DailyPaperFormula',
             name: 'DailyPaperFormula',
             component: DailyPaperFormula,
+        }, {
+            path: '/checkWAStatistical',
+            name: 'checkWAStatistical',
+            component: checkWAStatistical,
+        }, {
+            path: '/checkWASummary',
+            name: 'checkWASummary',
+            component: checkWASummary,
         }]
     }, {
         path: '/login',
